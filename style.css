@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'leelawadee';
+    src: url('./fonts/leelawadee-ui.ttf') format('truetype'),
+}
+
+@font-face {
+    font-family: 'montcers';
+    src: url('./fonts/Montcers.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'sarlotte';
+    src: url('./fonts/Sarlotte.otf') format('opentype');
+}
+
+
+/* Page CSS */
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    background-color: #fdf9f2;
+    overflow: auto;
+    height: 100%;
+}
+
+
+/* Intro Page */
+
+#intro{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.top-container{
+    text-align: center;
+}
+
+.top-container img{
+    width: auto;
+    height: min(8vh, 10vw);
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.header-text{
+    font-family: 'sarlotte';
+    font-size: min(3vw, 3vh);;
+    letter-spacing: 0.05em;
+    color: #446895;
+}
+
+.bottom-container{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.img-text-container{
+    position: relative;
+}
+
+.bottom-container img{
+    width: auto;
+    height: min(80vh, 120vw);
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.name-year-container{
+    position: absolute;
+    bottom: 5%;
+    right: -5%;
+}
+
+.chi-name-text1{
+    font-family: 'leelawadee';
+    letter-spacing: 0.1em;
+    font-size: min(5.5vw, 3.5vh);
+    color: #3d84b3;
+}
+
+.chi-name-text2{
+    margin-top: 0.2em;
+    font-family: 'leelawadee';
+    font-size: min(3.5vw, 2.5vh);
+    color: #a52024;
+}
+
+
