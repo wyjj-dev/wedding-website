@@ -50,7 +50,7 @@ html, body{
 
 .header-text{
     font-family: 'sarlotte';
-    font-size: min(3vw, 3vh);;
+    font-size: min(3vw, 3vh);
     letter-spacing: 0.05em;
     color: #446895;
 }
@@ -95,3 +95,80 @@ html, body{
 }
 
 
+/* Info Page */
+/* Location Section */
+
+#info{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.STD-loc-container{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.STD-text{
+    font-family: 'sarlotte';
+    font-size: min(5vw, 5vh);
+    letter-spacing: 0.05em;
+    color: #61395f;
+}
+
+.STD-pic-container{
+    width: 100%; /* Ensure it takes full width */
+    max-height: 50vh; /* Limit height */
+    overflow: hidden; /* Hide overflow */
+    position: relative;
+}
+
+.STD-pic-container img{
+    width: auto;
+    height: min(30vh, 30vw);
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.date-loc-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.date-loc-container img{
+    height: min(5vh, 5vw);
+    margin-right: 2%;
+}
+
+.date-text, .loc-text {
+    display: flex;                /* Use flexbox for alignment within each section */
+    align-items: center;          /* Center align items vertically */
+    font-size: min(3.8vw, 3.8vh);
+    font-family: 'sarlotte';
+    color: #446895;
+}
+
+.loc-text a {
+    display: flex;
+    text-decoration: none;    
+    align-items: center; /* Center vertically */
+    width: 100%; /* Ensure it takes the full width available */
+    color: #446895;       /* Match your text color */
+}
+
+.map-icon {
+    height: min(5vh, 5vw); /* Adjust the size of the map icon */
+    margin: 0;
+}
+
+/* RSVP Section */
+
+.timeline-rsvp-container{
+    bottom: 0;
+    height: 50vh;
+    overflow: hidden;
+}
