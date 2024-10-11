@@ -43,14 +43,14 @@ html, body{
 
 .top-container img{
     width: auto;
-    height: min(8vh, 10vw);
+    height: 30px;
     max-width: 100%;
     object-fit: contain;
 }
 
 .header-text{
     font-family: 'sarlotte';
-    font-size: min(3vw, 3vh);
+    font-size: 8px;
     letter-spacing: 0.05em;
     color: #446895;
 }
@@ -77,13 +77,13 @@ html, body{
 .name-year-container{
     position: absolute;
     bottom: 5%;
-    right: -5%;
+    right: 0;
 }
 
 .chi-name-text1{
     font-family: 'leelawadee';
     letter-spacing: 0.1em;
-    font-size: min(5.5vw, 3.5vh);
+    font-size: min(5vw, 3vh);
     color: #3d84b3;
 }
 
@@ -94,6 +94,9 @@ html, body{
     color: #a52024;
 }
 
+.hidden-container {
+    visibility: hidden;
+}
 
 /* Info Page */
 /* Location Section */
@@ -102,8 +105,11 @@ html, body{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+}
+
+.STD-loc-rsvp-container{
+    height: 100vh;
 }
 
 .STD-loc-container{
@@ -147,28 +153,142 @@ html, body{
 .date-text, .loc-text {
     display: flex;                /* Use flexbox for alignment within each section */
     align-items: center;          /* Center align items vertically */
-    font-size: min(3.8vw, 3.8vh);
+    font-size: min(2.8vw, 2.8vh);
     font-family: 'sarlotte';
     color: #446895;
+    padding-top: min(0.5vh, 0.5vw);
 }
 
 .loc-text a {
     display: flex;
-    text-decoration: none;    
     align-items: center; /* Center vertically */
-    width: 100%; /* Ensure it takes the full width available */
+    width: auto; /* Ensure it takes the full width available */
     color: #446895;       /* Match your text color */
-}
-
-.map-icon {
-    height: min(5vh, 5vw); /* Adjust the size of the map icon */
-    margin: 0;
+    white-space: nowrap;
+    padding-top: 0.5vh;
+    text-decoration: underline dotted;
+    text-decoration-thickness: min(0.1vh, 0.1vw);
 }
 
 /* RSVP Section */
 
 .timeline-rsvp-container{
-    bottom: 0;
     height: 50vh;
+    width: 100%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.timeline-container{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.timeline-center{
+    width: auto;
+    display: flex;
+}
+
+.dot-text-container {
+    height: 96%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: auto;
+    justify-content: center;
+}
+
+.timeline-event {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    margin-bottom: 5vh; /* Margin scales with screen height */
+}
+
+.event-text {
+    padding-left: calc(0.5vw + 0.5vh);
+    font-family: 'leelawadee';
+    font-size: min(2vw, 2vh); /* Text size scales with viewport size */
+    color: #446895;
+}
+
+.red-text{
+    padding-left: calc(0.5vw + 0.5vh);
+    font-family: 'leelawadee';
+    font-size: min(2vw, 2vh); /* Text size scales with viewport size */
+    color: #d3222b;
+}
+
+.big-dot, .small-dot {
+    border-radius: 50%;
+    background-color: black;
+    z-index: 1;
+    background-color: #446895;
+}
+
+.big-dot {
+    width: calc(0.85vw + 0.85vh); /* Dot size scales with viewport */
+    height: calc(0.85vw + 0.85vh);
+}
+
+.small-dot {
+    margin-left: calc(0.18vw + 0.18vh);
+    margin-right: calc(0.3vw + 0.3vh);
+    width: calc(0.5vw + 0.5vh); /* Smaller dot size scaling */
+    height: calc(0.5vw + 0.5vh);
+    
+}
+
+.line {
+    position: absolute;
+    width: calc(0.1vw + 0.1vh); /* Same width as big-line */
+    height: 100%;  /* Longer line height for middle events */
+    background-color: black;
+    left: calc(0.37vw + 0.37vh);
+    overflow: hidden;
+    background-color: #446895;    
+}
+
+.timeline-event:last-child{
+    margin: 0;
+}
+
+.timeline-event:last-child .event-text{
+    font-style: italic;
+}
+
+
+
+/* RSVP Section */
+.rsvp-container{
+    left: 50%;
+    width: 50%;
+}
+
+.rsvp-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rsvp-text-container a{
+    color: #d3222b;
+    text-decoration: none;
+}
+
+.rsvp-text-1 a{
+    font-size: min(15vw, 15vh);
+    font-weight: 300;
+    line-height: 0.95;
+}
+
+.rsvp-text-2 a{
+    font-family: 'sarlotte';
+    font-size: min(2.8vw, 2.8vh);
+}
+
+
