@@ -13,7 +13,6 @@
     src: url('./fonts/Sarlotte.otf') format('opentype');
 }
 
-
 /* Page CSS */
 
 *{
@@ -24,9 +23,44 @@
 html, body{
     background-color: #fdf9f2;
     overflow: auto;
-    height: 100%;
+    height: 200vh;
 }
 
+/* Loading Screen */
+#loading-screen{
+    position: fixed; /* Make it cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fdf9f2; /* Change this to your desired background color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Make sure it appears above other content */
+    transition: visibility 2s ease-out, opacity 2s ease-out; /* Transition for smooth fade-out effect */
+    opacity: 1; /* Start fully visible */
+}
+    
+#loading-screen.hidden {
+    opacity: 0; /* Change opacity to 0 to trigger fade-out */
+    visibility: 0;
+}
+
+#loading-screen img{
+    width: auto;
+    height: 30px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.loading-text{
+    font-family: 'sarlotte';
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: #446895;
+}
 
 /* Intro Page */
 
@@ -99,14 +133,23 @@ html, body{
 }
 
 /* Info Page */
-/* Location Section */
-
 #info{
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    visibility: hidden; /* or use opacity: 0; */
+    opacity: 0; /* Use opacity for fade-in effect */
 }
+
+/* When visible */
+#info.visible {
+    visibility: visible; /* or just remove this line if using opacity */
+    opacity: 1;
+    transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
+}
+
+/* Location Section */
 
 .STD-loc-rsvp-container{
     height: 100vh;
