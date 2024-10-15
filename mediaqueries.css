@@ -4,24 +4,76 @@
 
 
 
-@media screen and (max-height: 950px) {
+@media screen and (max-height: 950px) and (max-width: 500px) {
     .top-container img{
-        height: min(4vh, 4vw);
+        height: min(6vh, 6vw);
     }
-        
+
     .header-text{
-        font-size: min(1.3vw, 1.3vh);
+        font-size: min(2.3vw, 2.3vh);
     }
-}
 
-
-
-@media screen and (max-width: 600px) {
-    /* .top-container img{
-        height: 20px;
+    .bottom-container{
+        padding-bottom: 6vh;
     }
-        
-    .header-text{
-        font-size: 8px;
-    } */
+
+
+    /* Info page */
+
+    .STD-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .STD-loc-container {
+        height: 35vh;
+    }
+
+    .STD-text{
+        font-size: min(10vw, 10vh);
+    }
+
+    .date-loc-container{
+        align-items: center;
+    }
+
+    .date-text, .loc-text {
+        font-size: min(3.5vw, 3.5vh);
+    }
+
+    .date-loc-container img{
+        height: min(5vh, 5vw);
+    }
+
+    .mobile-center{
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+    /* RSVP Section */
+    .event-text{
+        font-size: min(3vw, 3vh);
+    }
+
+    .red-text{
+        font-size: min(3vw, 3vh);
+    }
+
+    .small-dot{
+        margin-left: calc(0.096vw + 0.096vh);
+        width: calc(0.39vw + 0.39vh); /* Smaller dot size scaling */
+        height: calc(0.39vw + 0.39vh);
+    }
+
+    .big-dot {
+        width: calc(0.7vw + 0.7vh); /* Dot size scales with viewport */
+        height: calc(0.7vw + 0.7vh);
+    }
+
+    .line {
+        left: calc(0.25vw + 0.25vh);
+    }
+
 }
