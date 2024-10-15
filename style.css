@@ -21,34 +21,37 @@
 }
 
 html, body{
-    background-color: #fdf9f2;
+    background-color: #fffcf5;
     overflow: auto;
     height: 200vh;
 }
 
 /* Loading Screen */
-#loading-screen{
-    position: fixed; /* Make it cover the entire viewport */
+/* Loading Screen CSS */
+#loading-screen {
+    position: fixed; /* Cover the whole viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fdf9f2; /* Change this to your desired background color */
+    background-color: #fffcf5;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 9999; /* Make sure it appears above other content */
-    transition: visibility 2s ease-out, opacity 2s ease-out; /* Transition for smooth fade-out effect */
-    opacity: 1; /* Start fully visible */
-}
-    
-#loading-screen.hidden {
-    opacity: 0; /* Change opacity to 0 to trigger fade-out */
-    visibility: 0;
+    opacity: 1; /* Fully visible by default */
+    transition: visibility 3s ease-out, opacity 3s ease-out; /* Smooth transition for opacity */
+    z-index: 99; /* Ensure it’s on top of everything else */
 }
 
-#loading-screen img{
+/* Loading Text and Image */
+.loading-text,
+#loading-screen img {
+    opacity: 0; /* Start invisible */
+    transition: opacity 3s ease-in; /* Fade-in transition */
+}
+
+#loading-screen img {
     width: auto;
     height: 30px;
     max-width: 100%;
@@ -59,8 +62,20 @@ html, body{
     font-family: 'sarlotte';
     font-size: 10px;
     letter-spacing: 0.05em;
-    color: #446895;
+    color: #3d6ca8;
 }
+
+/* Fade-in when loading screen is visible */
+#loading-screen.visible .loading-text,
+#loading-screen.visible img {
+    opacity: 1; /* Fully visible */
+}
+
+/* Hidden state for fade-out */
+#loading-screen.hidden {
+    opacity: 0; /* Change opacity to 0 to trigger fade-out */
+}
+
 
 /* Intro Page */
 
@@ -72,6 +87,7 @@ html, body{
 }
 
 .top-container{
+    padding-top: 25px;
     text-align: center;
 }
 
@@ -86,11 +102,12 @@ html, body{
     font-family: 'sarlotte';
     font-size: 8px;
     letter-spacing: 0.05em;
-    color: #446895;
+    color: #3d6ca8;
 }
 
 .bottom-container{
     flex: 1;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,16 +119,20 @@ html, body{
 }
 
 .bottom-container img{
+    padding-right: min(9vw, 9vh);
     width: auto;
-    height: min(80vh, 120vw);
-    max-width: 100%;
+    height: 90%;
+    max-width: 90%;
     object-fit: contain;
 }
 
 .name-year-container{
-    position: absolute;
-    bottom: 5%;
-    right: 0;
+    padding-right: min(9vw, 9vh);
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-weight: 100;
 }
 
 .chi-name-text1{
@@ -125,12 +146,9 @@ html, body{
     margin-top: 0.2em;
     font-family: 'leelawadee';
     font-size: min(3.5vw, 2.5vh);
-    color: #a52024;
+    color: #d90000;
 }
 
-.hidden-container {
-    visibility: hidden;
-}
 
 /* Info Page */
 #info{
@@ -153,6 +171,9 @@ html, body{
 
 .STD-loc-rsvp-container{
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .STD-loc-container{
@@ -165,8 +186,7 @@ html, body{
 .STD-text{
     font-family: 'sarlotte';
     font-size: min(5vw, 5vh);
-    letter-spacing: 0.05em;
-    color: #61395f;
+    color: #7439a8;
 }
 
 .STD-pic-container{
@@ -189,34 +209,34 @@ html, body{
 }
 
 .date-loc-container img{
-    height: min(5vh, 5vw);
-    margin-right: 2%;
+    height: min(3.5vh, 3.5vw);
+    margin-right: 1%;
 }
 
 .date-text, .loc-text {
     display: flex;                /* Use flexbox for alignment within each section */
     align-items: center;          /* Center align items vertically */
-    font-size: min(2.8vw, 2.8vh);
+    font-size: min(2vw, 2vh);
     font-family: 'sarlotte';
-    color: #446895;
-    padding-top: min(0.5vh, 0.5vw);
+    color: #3d6ca8;
+    padding-top: min(1vh, 1vw);
 }
 
 .loc-text a {
     display: flex;
     align-items: center; /* Center vertically */
     width: auto; /* Ensure it takes the full width available */
-    color: #446895;       /* Match your text color */
+    color: #3d6ca8;       /* Match your text color */
     white-space: nowrap;
     padding-top: 0.5vh;
     text-decoration: underline dotted;
-    text-decoration-thickness: min(0.1vh, 0.1vw);
+    text-decoration-thickness: min(0.3vh, 0.3vw);
 }
 
 /* RSVP Section */
 
 .timeline-rsvp-container{
-    height: 50vh;
+    height: 40vh;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -255,45 +275,45 @@ html, body{
 .event-text {
     padding-left: calc(0.5vw + 0.5vh);
     font-family: 'leelawadee';
-    font-size: min(2vw, 2vh); /* Text size scales with viewport size */
-    color: #446895;
+    font-size: min(1.3vw, 1.3vh); /* Text size scales with viewport size */
+    color: #3d6ca8;
 }
 
 .red-text{
     padding-left: calc(0.5vw + 0.5vh);
     font-family: 'leelawadee';
-    font-size: min(2vw, 2vh); /* Text size scales with viewport size */
-    color: #d3222b;
+    font-size: min(1.3vw, 1.3vh); /* Text size scales with viewport size */
+    color: #d90000;
 }
 
 .big-dot, .small-dot {
     border-radius: 50%;
     background-color: black;
     z-index: 1;
-    background-color: #446895;
+    background-color: #3d6ca8;
 }
 
 .big-dot {
-    width: calc(0.85vw + 0.85vh); /* Dot size scales with viewport */
-    height: calc(0.85vw + 0.85vh);
+    width: calc(0.55vw + 0.55vh); /* Dot size scales with viewport */
+    height: calc(0.55vw + 0.55vh);
 }
 
 .small-dot {
-    margin-left: calc(0.18vw + 0.18vh);
+    margin-left: calc(0.12vw + 0.12vh);
     margin-right: calc(0.3vw + 0.3vh);
-    width: calc(0.5vw + 0.5vh); /* Smaller dot size scaling */
-    height: calc(0.5vw + 0.5vh);
+    width: calc(0.3vw + 0.3vh); /* Smaller dot size scaling */
+    height: calc(0.3vw + 0.3vh);
     
 }
 
 .line {
     position: absolute;
-    width: calc(0.1vw + 0.1vh); /* Same width as big-line */
+    width: calc(0.08vw + 0.08vh); /* Same width as big-line */
     height: 100%;  /* Longer line height for middle events */
     background-color: black;
-    left: calc(0.37vw + 0.37vh);
+    left: calc(0.22vw + 0.22vh);
     overflow: hidden;
-    background-color: #446895;    
+    background-color: #3d6ca8;    
 }
 
 .timeline-event:last-child{
@@ -312,26 +332,15 @@ html, body{
     width: 50%;
 }
 
-.rsvp-text-container {
+.rsvp-container a{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
+
 }
 
-.rsvp-text-container a{
-    color: #d3222b;
-    text-decoration: none;
-}
-
-.rsvp-text-1 a{
-    font-size: min(15vw, 15vh);
-    font-weight: 300;
-    line-height: 0.95;
-}
-
-.rsvp-text-2 a{
-    font-family: 'sarlotte';
-    font-size: min(2.8vw, 2.8vh);
+.rsvp-container img{
+    width: 50%;
 }
 
 
