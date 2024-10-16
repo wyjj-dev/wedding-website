@@ -40,7 +40,7 @@ html, body{
     align-items: center;
     justify-content: center;
     opacity: 1; /* Fully visible by default */
-    transition: visibility 3s ease-out, opacity 3s ease-out; /* Smooth transition for opacity */
+    transition: visibility 2s ease-out, opacity 2s ease-out; /* Smooth transition for opacity */
     z-index: 99; /* Ensure it’s on top of everything else */
 }
 
@@ -48,7 +48,7 @@ html, body{
 .loading-text,
 #loading-screen img {
     opacity: 0; /* Start invisible */
-    transition: opacity 3s ease-in; /* Fade-in transition */
+    transition: opacity 2s ease-in; /* Fade-in transition */
 }
 
 #loading-screen img {
@@ -343,7 +343,7 @@ html, body{
 }
 
 .rsvp-container img{
-    width: 50%;
+    width: 80%;
 }
 
 

@@ -17,6 +17,15 @@
         padding-bottom: 6vh;
     }
 
+    .bottom-container img{
+        padding: 0;
+    }
+
+    .img-main{
+        display: flex;
+        justify-content: center;
+    }
+
 
     /* Info page */
 
@@ -27,7 +36,7 @@
     }
 
     .STD-loc-container {
-        height: 35vh;
+        height: 41vh;
     }
 
     .STD-text{
@@ -39,11 +48,11 @@
     }
 
     .date-text, .loc-text {
-        font-size: min(3.5vw, 3.5vh);
+        font-size: min(3.9vw, 3.9vh);
     }
 
     .date-loc-container img{
-        height: min(5vh, 5vw);
+        height: min(6vh, 6vw);
     }
 
     .mobile-center{
@@ -62,7 +71,7 @@
     }
 
     .small-dot{
-        margin-left: calc(0.096vw + 0.096vh);
+        margin-left: calc(0.15vw + 0.15vh);
         width: calc(0.39vw + 0.39vh); /* Smaller dot size scaling */
         height: calc(0.39vw + 0.39vh);
     }
@@ -73,7 +82,15 @@
     }
 
     .line {
-        left: calc(0.25vw + 0.25vh);
+        left: calc(0.3vw + 0.3vh);
+    }
+
+    .rsvp-container a{
+        justify-content: flex-start;
+    }
+
+    .timeline-container {
+        justify-content: flex-end;
     }
 
 }

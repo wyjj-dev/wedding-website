@@ -23,16 +23,19 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add the visible class to start the fade-in effect
     loadingScreen.classList.add('visible');
 
-    // Set a timeout to hide the loading screen after 5 seconds
-    setTimeout(() => {
-        // Add the hidden class to trigger the fade-out
-        loadingScreen.classList.add('hidden');
-        
-        // Remove the loading screen from the DOM after the fade-out is complete
+    // Wait for the window load event (which ensures all images, fonts, etc., are loaded)
+    window.onload = function() {
+        // Once everything is loaded, wait for 1 second, then fade out the loading screen
         setTimeout(() => {
-            loadingScreen.style.display = 'none'; // You can also use loadingScreen.remove() to remove it completely
-        }, 3000); // Match this duration with the CSS transition duration
-    }, 5000); // Show loading screen for 5 seconds
+            // Add the hidden class to trigger the fade-out effect
+            loadingScreen.classList.add('hidden');
+            
+            // After the fade-out animation is done, remove the loading screen from the DOM
+            setTimeout(() => {
+                loadingScreen.style.display = 'none'; // Or loadingScreen.remove() to remove it entirely
+            }, 2000); // Match this duration with the CSS transition duration
+        }, 4000); // Optional delay before starting fade-out
+    };
 });
 
 
