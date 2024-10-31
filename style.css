@@ -24,7 +24,15 @@ html, body{
     background-color: #fffcf5;
     overflow: auto;
     height: 300vh;
+    scroll-behavior: smooth; /* Enables smooth scrolling */
+    scroll-snap-type: y mandatory; /* Ensure snapping behavior */
 }
+
+section {
+    height: 100vh; /* Each section takes full viewport height */
+    scroll-snap-align: start; /* Aligns to the start of the viewport */
+}
+
 
 /* Loading Screen */
 /* Loading Screen CSS */
@@ -351,6 +359,15 @@ html, body{
 /* FAQ Page */
 #faq {
     height: 100vh;
+    visibility: hidden; /* Start hidden */
+    opacity: 0; /* Start with no opacity */
+    transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
+}
+
+/* When visible */
+#faq.visible {
+    visibility: visible; /* Makes it visible in the layout */
+    opacity: 1; /* Fully visible */
 }
 
 .faq-top-container {
@@ -358,24 +375,23 @@ html, body{
     font-family: 'sarlotte';
     font-size: min(8vw, 8vh);
     color: #7439a8;
+    padding-top: min(8vw, 8vh);
 }
 
 .faq-bottom-container {
     font-family: 'leelawadee';
     color: #3d6ca8;
     padding: 20px;
-    font-size: 3vw;
-}
-
-.question-answer-container{
-    padding: 5px;
+    font-size: min(3vw, 3vh);
 }
 
 /* Answer containers start hidden */
 .answer-container {
     display: none;
-    padding-left: 20px;
+    padding-left: min(8vw, 8vh);
+    padding-right: min(8vw, 8vh);
     transition: all 0.3s ease;
+    text-align: justify;
 }
 
 /* Question hover effect for better UX */
@@ -383,7 +399,14 @@ html, body{
     cursor: pointer;
     margin: 10px 0;
     padding-top: 10px;
-    border-top: 1px solid #3d6ca8;
+    border-top: 2px dotted #3d6ca8;
+    display: flex;
+    align-items: center;
+}
+
+.question-container img{
+    height: min(3.5vw, 3.5vh);
+    padding-right: min(1vw, 1vh);
 }
 
 /* Remove top border from the first question in the FAQ section */
@@ -393,6 +416,6 @@ html, body{
 }
 
 .question-container:hover {
-    color: #4b8ce0;
+    color: #d90000;
 }
 

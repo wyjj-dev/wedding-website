@@ -41,10 +41,12 @@
 
     .STD-text{
         font-size: min(10vw, 10vh);
+        padding-bottom: min(2vw, 2vh);
     }
 
     .date-loc-container{
         align-items: center;
+        padding-top: min(2vw, 2vh);
     }
 
     .date-text, .loc-text {
@@ -91,6 +93,14 @@
 
     .timeline-container {
         justify-content: flex-end;
+    }
+
+    .timeline-center{
+        padding-right: min(8vw, 8vh);
+    }
+
+    .rsvp-container img {
+        padding-left: min(8vw, 8vh);
     }
 
 }
