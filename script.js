@@ -43,13 +43,111 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    window.addEventListener('scroll', checkVisibility);
+    window.addEventListener('scroll', checkVisibility, { passive: false });
+
 });
 
 
 
-//FAQ question answer
+//Scoll effect
 
+const sections = document.querySelectorAll('section');
+let currentSection = 0;
+const MIN_SWIPE_DISTANCE = 50; // Minimum swipe distance in pixels to trigger scrolling
+
+function scrollToSection(index) {
+    if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds scrolling
+    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    currentSection = index;
+}
+
+function handleScroll(event) {
+    event.preventDefault(); // Prevent default scrolling behavior
+
+    // Scroll to the next section based on scroll direction
+    if (event.deltaY > 0) {
+        scrollToSection(currentSection + 1); // Scroll down
+    } else {
+        scrollToSection(currentSection - 1); // Scroll up
+    }
+}
+
+// Attach the handleScroll function to the mouse wheel event
+window.addEventListener('wheel', handleScroll, { passive: false });
+
+// Touch events for mobile
+let touchStartY = 0;
+
+window.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0].clientY; // Capture the starting touch position
+});
+
+window.addEventListener('touchend', (event) => {
+    const touchEndY = event.changedTouches[0].clientY; // Capture the ending touch position
+    const deltaY = touchEndY - touchStartY; // Calculate the swipe distance
+
+    // Only trigger scrolling if the swipe distance exceeds the minimum
+    if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE) {
+        if (deltaY < 0) {
+            scrollToSection(currentSection + 1); // Swiping up
+        } else if (deltaY > 0) {
+            scrollToSection(currentSection - 1); // Swiping down
+        }
+    }
+});
+
+
+
+//Translate
+// Toggle Language for FAQ
+let currentLanguage = 'english'; // Default language
+
+document.addEventListener('DOMContentLoaded', function() {
+    const languageToggleButton = document.getElementById('languageToggle');
+
+    // Add event listener to the language toggle button
+    languageToggleButton.addEventListener('click', () => {
+        // Toggle the current language
+        currentLanguage = currentLanguage === 'english' ? 'chinese' : 'english';
+        // Update button text based on current language
+        languageToggleButton.innerText = currentLanguage === 'english' ? '中文' : 'ENG';
+
+        // Call the function to toggle text visibility
+        toggleLanguage();
+    });
+
+    // Call toggleLanguage on initial load to ensure the correct language is shown
+    toggleLanguage();
+});
+
+// Function to toggle language visibility in FAQ
+function toggleLanguage() {
+    // Select all question-answer pairs
+    const questions = document.querySelectorAll('.Q-A');
+
+    questions.forEach(question => {
+        // Select English and Chinese text divs for questions and answers
+        const englishQuestion = question.querySelector('.question-container .english');
+        const chineseQuestion = question.querySelector('.question-container .chinese');
+        const englishAnswer = question.querySelector('.answer-container .english');
+        const chineseAnswer = question.querySelector('.answer-container .chinese');
+
+        // Show or hide text based on current language
+        if (currentLanguage === 'english') {
+            englishQuestion.style.display = 'block'; // Show English question
+            chineseQuestion.style.display = 'none';   // Hide Chinese question
+            englishAnswer.style.display = 'block';    // Show English answer
+            chineseAnswer.style.display = 'none';      // Hide Chinese answer
+        } else {
+            englishQuestion.style.display = 'none';   // Hide English question
+            chineseQuestion.style.display = 'block';  // Show Chinese question
+            englishAnswer.style.display = 'none';     // Hide English answer
+            chineseAnswer.style.display = 'block';     // Show Chinese answer
+        }
+    });
+}
+
+// FAQ question answer toggle function
 function toggleAnswer(clickedQuestion) {
     // Select all answer containers
     const allAnswers = document.querySelectorAll('.answer-container');
@@ -70,67 +168,5 @@ function toggleAnswer(clickedQuestion) {
         answer.style.display = "block";
     }
 }
-
-
-
-//Scoll effect
-
-const sections = document.querySelectorAll('section');
-let currentSection = 0;
-let isScrolling; // Variable to hold the timeout
-
-function scrollToSection(index) {
-    if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds
-    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    currentSection = index;
-}
-
-function handleScroll(event) {
-    event.preventDefault(); // Prevent default scrolling
-
-    // Clear the timeout if the user continues to scroll
-    clearTimeout(isScrolling);
-
-    // Set a timeout to execute the scroll action after the user stops scrolling
-    isScrolling = setTimeout(() => {
-        // Check scroll direction
-        if (event.deltaY > 0) {
-            // Scrolling down
-            scrollToSection(currentSection + 1);
-        } else {
-            // Scrolling up
-            scrollToSection(currentSection - 1);
-        }
-    }, 100); // Adjust this delay for how long to wait after scrolling
-}
-
-window.addEventListener('wheel', handleScroll);
-
-// Touch events for mobile
-let touchStartY = 0;
-
-window.addEventListener('touchstart', (event) => {
-    touchStartY = event.touches[0].clientY; // Get initial touch position
-});
-
-window.addEventListener('touchend', (event) => {
-    const touchEndY = event.changedTouches[0].clientY; // Get final touch position
-    const deltaY = touchEndY - touchStartY; // Calculate the difference
-
-    // Clear the timeout if the user continues to scroll
-    clearTimeout(isScrolling);
-
-    // Set a timeout to execute the scroll action after the user stops scrolling
-    isScrolling = setTimeout(() => {
-        // Check scroll direction
-        if (deltaY > 0) {
-            // Swiping down
-            scrollToSection(currentSection - 1);
-        } else if (deltaY < 0) {
-            // Swiping up
-            scrollToSection(currentSection + 1);
-        }
-    }, 100); // Adjust this delay for how long to wait after scrolling
-});
 
 

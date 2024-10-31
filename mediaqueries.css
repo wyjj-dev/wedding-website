@@ -103,4 +103,12 @@
         padding-left: min(8vw, 8vh);
     }
 
+    /* FAQ Page */
+    .faq-container{
+        width: auto;
+    }
+    
+    .faq-bottom-container {
+        font-size: min(3vw, 3vh);
+    }
 }

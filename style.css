@@ -362,12 +362,22 @@ section {
     visibility: hidden; /* Start hidden */
     opacity: 0; /* Start with no opacity */
     transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
+    display: flex;
+    justify-content: center;
+
 }
 
 /* When visible */
 #faq.visible {
     visibility: visible; /* Makes it visible in the layout */
     opacity: 1; /* Fully visible */
+}
+
+.faq-container{
+    width: 55vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .faq-top-container {
@@ -382,7 +392,7 @@ section {
     font-family: 'leelawadee';
     color: #3d6ca8;
     padding: 20px;
-    font-size: min(3vw, 3vh);
+    font-size: min(2vw, 2vh);
 }
 
 /* Answer containers start hidden */
@@ -410,12 +420,27 @@ section {
 }
 
 /* Remove top border from the first question in the FAQ section */
-.question-answer-container > .Q-A-1 > .question-container {
+.question-answer-container > .Q-A:first-child > .question-container {
     padding-top: 0;
     border-top: none;
 }
 
 .question-container:hover {
     color: #d90000;
+}
+
+#languageToggle {
+    background-color: #719cd4;
+    color: white; /* White text */
+    border: none; /* Remove borders */
+    border-radius: min(3vw, 3vh); /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition for background color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: min(1.5vw, 1.5vh);
+    height: min(3vw, 3vh);
+    width: min(6vw, 6vh);
 }
 
