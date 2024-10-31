@@ -39,4 +39,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+function toggleAnswer(questionElement) {
+    const answer = questionElement.nextElementSibling;
+    answer.style.display = (answer.style.display === "block") ? "none" : "block";
+}
+
+
 

@@ -23,7 +23,7 @@
 html, body{
     background-color: #fffcf5;
     overflow: auto;
-    height: 200vh;
+    height: 300vh;
 }
 
 /* Loading Screen */
@@ -346,4 +346,53 @@ html, body{
     width: 80%;
 }
 
+
+
+/* FAQ Page */
+#faq {
+    height: 100vh;
+}
+
+.faq-top-container {
+    text-align: center;
+    font-family: 'sarlotte';
+    font-size: min(8vw, 8vh);
+    color: #7439a8;
+}
+
+.faq-bottom-container {
+    font-family: 'leelawadee';
+    color: #3d6ca8;
+    padding: 20px;
+    font-size: 3vw;
+}
+
+.question-answer-container{
+    padding: 5px;
+}
+
+/* Answer containers start hidden */
+.answer-container {
+    display: none;
+    padding-left: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Question hover effect for better UX */
+.question-container {
+    cursor: pointer;
+    margin: 10px 0;
+    padding-top: 10px;
+    border-top: 1px solid #3d6ca8;
+}
+
+/* Remove top border from the first question in the FAQ section */
+.question-answer-container > .Q-A-1 > .question-container {
+    padding-top: 0;
+    border-top: none;
+}
+
+.question-container:hover {
+    color: #4b8ce0;
+}
 
