@@ -34,7 +34,6 @@ section {
     scroll-snap-align: start; /* Aligns to the start of the viewport */
 }
 
-
 /* Loading Screen */
 /* Loading Screen CSS */
 #loading-screen {
@@ -52,6 +51,7 @@ section {
     transition: visibility 2s ease-out, opacity 2s ease-out; /* Smooth transition for opacity */
     z-index: 99; /* Ensure it’s on top of everything else */
 }
+
 
 /* Loading Text and Image */
 .loading-text,
@@ -82,7 +82,15 @@ section {
 
 /* Hidden state for fade-out */
 #loading-screen.hidden {
-    opacity: 0; /* Change opacity to 0 to trigger fade-out */
+    opacity: 0;
+}
+
+/* Disable scrolling */
+.no-scroll {
+    overflow: hidden; /* Prevents scrolling */
+    height: 100vh;   /* Ensures the body takes the full height */
+    position: fixed;  /* Fixes the body position */
+    width: 100%;     /* Ensures full width */
 }
 
 
