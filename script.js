@@ -1,3 +1,10 @@
+//start from top no matter what
+
+window.addEventListener('load', function () {
+    window.scrollTo(0, 0);
+});
+
+
 //Loading Page
 
 document.addEventListener("DOMContentLoaded", function() {

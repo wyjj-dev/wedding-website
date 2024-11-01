@@ -455,5 +455,6 @@ section {
     font-size: min(1.5vw, 1.5vh);
     height: min(3vw, 3vh);
     width: min(6vw, 6vh);
+    outline: none;
 }
 
