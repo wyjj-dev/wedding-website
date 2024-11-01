@@ -126,6 +126,7 @@ section {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    padding-bottom: min(15vw, 15vh);
 }
 
 .img-text-container{
