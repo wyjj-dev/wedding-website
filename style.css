@@ -15,6 +15,11 @@
 
 /* Page CSS */
 
+:root {
+    --effective-vh: 100vh; /* Default value */
+}
+
+
 *{
     margin: 0;
     padding: 0;

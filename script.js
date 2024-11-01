@@ -1,12 +1,16 @@
-function setDynamicHeight() {
-    const viewportHeight = window.innerHeight;
-    const container = document.querySelector('.faq-container');
-    container.style.height = `${viewportHeight}px`;
+function setViewingSize() {
+    // Get the total height of the window
+    const totalHeight = window.innerHeight;
+    // Calculate the effective height (you can adjust the offset if needed)
+    const effectiveHeight = totalHeight - 100; // Adjust this value based on your needs
+
+    // Set the height of your main container
+    document.documentElement.style.setProperty('--effective-vh', `${effectiveHeight}px`);
 }
 
-// Set height on load and on resize
-window.addEventListener('load', setDynamicHeight);
-window.addEventListener('resize', setDynamicHeight);
+// Call the function on load and resize
+window.addEventListener('load', setViewingSize);
+window.addEventListener('resize', setViewingSize);
 
 
 
