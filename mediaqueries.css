@@ -117,4 +117,8 @@
         height: min(5vw, 5vh);
         width: min(8vw, 8vh);
     }
+
+    .button-bottom {
+        padding-bottom: min(20vw, 20vh); /* Optional: adds some spacing from the bottom */
+    }
 }
