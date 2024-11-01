@@ -1,3 +1,15 @@
+function setDynamicHeight() {
+    const viewportHeight = window.innerHeight;
+    const container = document.querySelector('.faq-container');
+    container.style.height = `${viewportHeight}px`;
+}
+
+// Set height on load and on resize
+window.addEventListener('load', setDynamicHeight);
+window.addEventListener('resize', setDynamicHeight);
+
+
+
 //start from top no matter what
 
 window.addEventListener('load', function () {
@@ -59,16 +71,23 @@ document.addEventListener("DOMContentLoaded", function () {
 //Scoll effect
 const sections = document.querySelectorAll('section');
 let currentSection = 0;
-const MIN_SWIPE_DISTANCE = 50; // Minimum swipe distance in pixels to trigger scrolling
+const MIN_SWIPE_DISTANCE = 100; // Minimum swipe distance in pixels to trigger scrolling
+const SCROLL_TIMEOUT = 600; // Timeout duration to limit scroll events
+let isScrolling = false; // Flag to prevent multiple scrolls
 
 function scrollToSection(index) {
     if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds scrolling
     sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    currentSection = index;
+    currentSection = index; // Update the current section index
 }
 
 function handleScroll(event) {
     event.preventDefault(); // Prevent default scrolling behavior
+
+    // Prevent multiple scroll actions if already scrolling
+    if (isScrolling) return;
+
+    isScrolling = true; // Set scrolling flag
 
     // Scroll to the next section based on scroll direction
     if (event.deltaY > 0) {
@@ -76,6 +95,11 @@ function handleScroll(event) {
     } else {
         scrollToSection(currentSection - 1); // Scroll up
     }
+
+    // Reset isScrolling after a timeout
+    setTimeout(() => {
+        isScrolling = false; // Allow scrolling again after the timeout
+    }, SCROLL_TIMEOUT);
 }
 
 // Attach the handleScroll function to the mouse wheel event
@@ -83,17 +107,19 @@ window.addEventListener('wheel', handleScroll, { passive: false });
 
 // Touch events for mobile
 let touchStartY = 0;
+let touchEndY = 0;
 
 window.addEventListener('touchstart', (event) => {
     touchStartY = event.touches[0].clientY; // Capture the starting touch position
 });
 
 window.addEventListener('touchend', (event) => {
-    const touchEndY = event.changedTouches[0].clientY; // Capture the ending touch position
+    touchEndY = event.changedTouches[0].clientY; // Capture the ending touch position
     const deltaY = touchEndY - touchStartY; // Calculate the swipe distance
 
     // Only trigger scrolling if the swipe distance exceeds the minimum
     if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE) {
+        // Determine the swipe direction and scroll accordingly
         if (deltaY < 0) {
             scrollToSection(currentSection + 1); // Swiping up
         } else if (deltaY > 0) {
@@ -101,6 +127,11 @@ window.addEventListener('touchend', (event) => {
         }
     }
 });
+
+// Optional: Prevent default behavior for touch events to avoid scrolling in the browser
+window.addEventListener('touchmove', (event) => {
+    event.preventDefault();
+}, { passive: false });
 
 
 //Translate
