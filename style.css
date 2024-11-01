@@ -26,6 +26,7 @@ html, body{
     height: 300vh;
     scroll-behavior: smooth; /* Enables smooth scrolling */
     scroll-snap-type: y mandatory; /* Ensure snapping behavior */
+    overflow-x: hidden;
 }
 
 section {
