@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //Scoll effect
-
 const sections = document.querySelectorAll('section');
 let currentSection = 0;
 const MIN_SWIPE_DISTANCE = 50; // Minimum swipe distance in pixels to trigger scrolling
@@ -102,7 +101,6 @@ window.addEventListener('touchend', (event) => {
         }
     }
 });
-
 
 
 //Translate
