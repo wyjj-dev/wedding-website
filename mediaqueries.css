@@ -111,4 +111,10 @@
     .faq-bottom-container {
         font-size: min(3vw, 3vh);
     }
+
+    #languageToggle {
+        font-size: min(3vw, 3vh);
+        height: min(5vw, 5vh);
+        width: min(8vw, 8vh);
+    }
 }

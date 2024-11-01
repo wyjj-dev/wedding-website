@@ -363,7 +363,8 @@ section {
     opacity: 0; /* Start with no opacity */
     transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
 }
 
@@ -374,6 +375,7 @@ section {
 }
 
 .faq-container{
+    height: 100vh;
     width: 55vw;
     display: flex;
     flex-direction: column;
@@ -427,6 +429,17 @@ section {
 
 .question-container:hover {
     color: #d90000;
+}
+
+.faq-bottom-container {
+    flex-grow: 1; /* Allows the content area to grow and push the button down */
+}
+
+.button-bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: auto; /* Pushes the button to the bottom */
+    padding-bottom: min(10vw, 10vh); /* Optional: adds some spacing from the bottom */
 }
 
 #languageToggle {
