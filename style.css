@@ -432,7 +432,8 @@ section {
 }
 
 .faq-bottom-container {
-    flex-grow: 1; /* Allows the content area to grow and push the button down */
+    flex-grow: 1;
+    width: 100%;
 }
 
 .button-bottom {
