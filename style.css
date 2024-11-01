@@ -399,8 +399,9 @@ section {
 .faq-bottom-container {
     font-family: 'leelawadee';
     color: #3d6ca8;
-    padding: 20px;
+    padding: min(2vw, 2vh);
     font-size: min(2vw, 2vh);
+    width: 100%;
 }
 
 /* Answer containers start hidden */
