@@ -1,16 +1,17 @@
-function setViewingSize() {
-    // Get the total height of the window
-    const totalHeight = window.innerHeight;
-    // Calculate the effective height (you can adjust the offset if needed)
-    const effectiveHeight = totalHeight - 100; // Adjust this value based on your needs
+document.addEventListener('touchstart', function (event) {
+    if (event.touches.length > 1) {
+        event.preventDefault(); // Prevents pinch-to-zoom
+    }
+}, { passive: false });
 
-    // Set the height of your main container
-    document.documentElement.style.setProperty('--effective-vh', `${effectiveHeight}px`);
-}
-
-// Call the function on load and resize
-window.addEventListener('load', setViewingSize);
-window.addEventListener('resize', setViewingSize);
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault(); // Prevents double-tap zoom
+    }
+    lastTouchEnd = now;
+}, { passive: false });
 
 
 
