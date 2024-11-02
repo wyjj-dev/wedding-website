@@ -73,31 +73,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// //Scoll effect
 // Scroll Snap Effect
 const sections = document.querySelectorAll('section');
 let isSnapping = false; // Flag to prevent snapping while already snapping
 let scrollTimeout; // Timeout to detect end of user scroll
+let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-// Function to find and scroll to the closest section
-function snapToClosestSection() {
+// Function to snap to the closest section based on scroll direction
+function snapToClosestSection(scrollDown) {
     if (isSnapping) return;
     isSnapping = true;
 
-    let closestSectionIndex = 0;
-    let minDistance = Math.abs(sections[0].getBoundingClientRect().top);
+    const viewportHeight = window.innerHeight;
+    let closestSection = null;
+    let closestDistance = Infinity; // Start with a large number
 
-    // Find the section with the smallest distance from the viewport's top
     sections.forEach((section, index) => {
-        const distance = Math.abs(section.getBoundingClientRect().top);
-        if (distance < minDistance) {
-            minDistance = distance;
-            closestSectionIndex = index;
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top; // Distance from top of viewport to top of section
+        const sectionBottom = rect.bottom; // Distance from top of viewport to bottom of section
+
+        // Only consider sections that are currently in the viewport
+        if (sectionTop < viewportHeight && sectionBottom > 0) {
+            const distance = Math.abs(sectionTop); // Distance from top of viewport
+
+            // Update closest section based on scroll direction
+            if (scrollDown) {
+                if (distance < closestDistance && sectionTop >= 0) {
+                    closestDistance = distance;
+                    closestSection = section; // Select the closest section while scrolling down
+                }
+            } else {
+                if (distance < closestDistance && sectionBottom <= viewportHeight) {
+                    closestDistance = distance;
+                    closestSection = section; // Select the closest section while scrolling up
+                }
+            }
         }
     });
 
-    // Scroll smoothly to the closest section
-    sections[closestSectionIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll smoothly to the closest section if found
+    if (closestSection) {
+        closestSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     // Reset snapping after scroll completes
     setTimeout(() => {
@@ -105,16 +123,18 @@ function snapToClosestSection() {
     }, 600); // Adjust duration as needed
 }
 
-// Listen for the scroll event
+// Listen for the scroll event to determine the direction
 window.addEventListener('scroll', () => {
-    // Clear the previous timeout if still scrolling
-    clearTimeout(scrollTimeout);
+    clearTimeout(scrollTimeout); // Clear previous timeout if still scrolling
 
-    // Set a timeout to snap after the user stops scrolling
-    scrollTimeout = setTimeout(snapToClosestSection, 150); // Adjust delay as needed
+    // Determine if user is scrolling down or up
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollDown = scrollTop > lastScrollTop;
+    lastScrollTop = scrollTop;
+
+    // Set a timeout to snap to the closest section after the user stops scrolling
+    scrollTimeout = setTimeout(() => snapToClosestSection(scrollDown), 150); // Adjust delay as needed
 });
-
-
 
 
 
