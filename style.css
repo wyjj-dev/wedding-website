@@ -250,7 +250,7 @@ section {
     padding-top: min(1vh, 1vw);
 }
 
-.loc-text a {
+.loc-text a, .date-text a {
     display: flex;
     align-items: center; /* Center vertically */
     width: auto; /* Ensure it takes the full width available */
