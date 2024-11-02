@@ -58,6 +58,7 @@ section {
     z-index: 99; /* Ensure it’s on top of everything else */
 }
 
+
 /* Loading Text and Image */
 .loading-text,
 #loading-screen img {
@@ -93,11 +94,21 @@ section {
 
 /* Intro Page */
 
-#intro{
+#intro {
     height: 100vh;
+    visibility: hidden; /* Start hidden */
+    opacity: 0; /* Start with no opacity */
+    transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
+
+}
+
+/* When visible */
+#intro.visible {
+    visibility: visible; /* Makes it visible in the layout */
+    opacity: 1; /* Fully visible */
 }
 
 .top-container{

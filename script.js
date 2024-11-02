@@ -1,3 +1,5 @@
+//Disable iPad zooming
+
 document.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
         event.preventDefault(); // Prevents pinch-to-zoom
@@ -15,15 +17,8 @@ document.addEventListener('touchend', function (event) {
 
 
 
-//start from top no matter what
 
-window.addEventListener('load', function () {
-    window.scrollTo(0, 0);
-});
-
-
-//Loading Page
-
+//Loading Page & scroll to top
 document.addEventListener("DOMContentLoaded", function() {
     const loadingScreen = document.getElementById('loading-screen');
 
@@ -32,8 +27,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Wait for the window load event (which ensures all images, fonts, etc., are loaded)
     window.onload = function() {
-        // Once everything is loaded, wait for 1 second, then fade out the loading screen
+        // Once everything is loaded, wait for 1 second, then start fading out the loading screen
         setTimeout(() => {
+            window.scrollTo(0, 0); // Scroll to the top before fade-out begins
+
             // Add the hidden class to trigger the fade-out effect
             loadingScreen.classList.add('hidden');
             
@@ -48,9 +45,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
 // fade in page
 document.addEventListener("DOMContentLoaded", function () {
-    const sections = [document.querySelector('#info'), document.querySelector('#faq')];
+    const sections = [document.querySelector('#intro'), document.querySelector('#info'), document.querySelector('#faq')];
 
     function isInView(element) {
         const sectionPosition = element.getBoundingClientRect();
@@ -67,9 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    window.addEventListener('scroll', checkVisibility, { passive: false });
+    // Initial visibility check
+    checkVisibility(); // Ensure the first page is visible on load
 
+    window.addEventListener('scroll', checkVisibility, { passive: false });
 });
+
 
 
 
