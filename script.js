@@ -74,77 +74,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // //Scoll effect
-// Scroll effect
+// Scroll Snap Effect
 const sections = document.querySelectorAll('section');
-let currentSection = 0;
-const MIN_SWIPE_DISTANCE = 100; // Minimum swipe distance in pixels to trigger scrolling
-const SCROLL_TIMEOUT = 600; // Timeout duration to limit scroll events
-let isScrolling = false; // Flag to prevent multiple scrolls
+let isSnapping = false; // Flag to prevent snapping while already snapping
+let scrollTimeout; // Timeout to detect end of user scroll
 
-// Function to scroll precisely to a section, aligning its bottom with the viewport's bottom
-function scrollToSection(index) {
-    if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds scrolling
-    sections[index].scrollIntoView({ behavior: 'smooth', block: 'end' });
-    currentSection = index; // Update the current section index
-}
+// Function to find and scroll to the closest section
+function snapToClosestSection() {
+    if (isSnapping) return;
+    isSnapping = true;
 
-// Ensure complete scroll to the section without stopping in the middle
-function handleScroll(event) {
-    event.preventDefault(); // Prevent default scrolling behavior
+    let closestSectionIndex = 0;
+    let minDistance = Math.abs(sections[0].getBoundingClientRect().top);
 
-    // Prevent multiple scroll actions if already scrolling
-    if (isScrolling) return;
-    isScrolling = true; // Set scrolling flag
-
-    // Detect scroll direction and scroll to the next or previous section
-    if (event.deltaY > 0) {
-        // Scroll down if we're not on the last section
-        if (currentSection < sections.length - 1) {
-            scrollToSection(currentSection + 1);
+    // Find the section with the smallest distance from the viewport's top
+    sections.forEach((section, index) => {
+        const distance = Math.abs(section.getBoundingClientRect().top);
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestSectionIndex = index;
         }
-    } else {
-        // Scroll up if we're not on the first section
-        if (currentSection > 0) {
-            scrollToSection(currentSection - 1);
-        }
-    }
+    });
 
-    // Reset isScrolling after a timeout
+    // Scroll smoothly to the closest section
+    sections[closestSectionIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Reset snapping after scroll completes
     setTimeout(() => {
-        isScrolling = false; // Allow scrolling again after the timeout
-    }, SCROLL_TIMEOUT);
+        isSnapping = false;
+    }, 600); // Adjust duration as needed
 }
 
-// Attach the handleScroll function to the mouse wheel event
-window.addEventListener('wheel', handleScroll, { passive: false });
+// Listen for the scroll event
+window.addEventListener('scroll', () => {
+    // Clear the previous timeout if still scrolling
+    clearTimeout(scrollTimeout);
 
-// Touch events for mobile
-let touchStartY = 0;
-let touchEndY = 0;
-
-window.addEventListener('touchstart', (event) => {
-    touchStartY = event.touches[0].clientY; // Capture the starting touch position
+    // Set a timeout to snap after the user stops scrolling
+    scrollTimeout = setTimeout(snapToClosestSection, 150); // Adjust delay as needed
 });
-
-window.addEventListener('touchend', (event) => {
-    touchEndY = event.changedTouches[0].clientY; // Capture the ending touch position
-    const deltaY = touchEndY - touchStartY; // Calculate the swipe distance
-
-    // Only trigger scrolling if the swipe distance exceeds the minimum
-    if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE) {
-        // Determine the swipe direction and scroll accordingly
-        if (deltaY < 0 && currentSection < sections.length - 1) {
-            scrollToSection(currentSection + 1); // Swipe up to go down
-        } else if (deltaY > 0 && currentSection > 0) {
-            scrollToSection(currentSection - 1); // Swipe down to go up
-        }
-    }
-});
-
-// Optional: Prevent default behavior for touch events to avoid scrolling in the browser
-window.addEventListener('touchmove', (event) => {
-    event.preventDefault();
-}, { passive: false });
 
 
 
