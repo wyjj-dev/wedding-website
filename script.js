@@ -17,9 +17,11 @@ document.addEventListener('touchend', function (event) {
 
 // Start from top no matter what
 window.addEventListener('load', function () {
-    window.scrollTo(0, 0);
+    // Using setTimeout to ensure layout has stabilized
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100); // Short delay to ensure the page is ready
 });
-
 
 // Loading Page
 document.addEventListener("DOMContentLoaded", function() {
@@ -36,9 +38,12 @@ document.addEventListener("DOMContentLoaded", function() {
     window.onload = function() {
         // Once everything is loaded, wait for 1 second, then fade out the loading screen
         setTimeout(() => {
+            // Scroll to the top after a slight delay
+            window.scrollTo(0, 0); // Ensure it scrolls to the top
+            
             // Add the hidden class to trigger the fade-out effect
             loadingScreen.classList.add('hidden');
-            
+
             // After the fade-out animation is done, remove the loading screen from the DOM
             setTimeout(() => {
                 loadingScreen.style.display = 'none'; // Or loadingScreen.remove() to remove it entirely
@@ -50,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 4000); // Optional delay before starting fade-out
     };
 });
+
 
 
 
