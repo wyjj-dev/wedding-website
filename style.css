@@ -448,7 +448,7 @@ section {
     display: flex;
     justify-content: center;
     margin-top: auto; /* Pushes the button to the bottom */
-    padding-bottom: min(10vw, 10vh); /* Optional: adds some spacing from the bottom */
+    padding-bottom: min(15vw, 15vh); /* Optional: adds some spacing from the bottom */
 }
 
 #languageToggle {

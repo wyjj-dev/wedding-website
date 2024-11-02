@@ -73,69 +73,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// Scroll Snap Effect
+// Scroll effect
+
 const sections = document.querySelectorAll('section');
-let isSnapping = false; // Flag to prevent snapping while already snapping
-let scrollTimeout; // Timeout to detect end of user scroll
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+let currentSection = 0;
+const MIN_SWIPE_DISTANCE = 100; // Minimum swipe distance in pixels to trigger scrolling
+const SCROLL_TIMEOUT = 600; // Timeout duration to limit scroll events
+let isScrolling = false; // Flag to prevent multiple scrolls
 
-// Function to snap to the closest section based on scroll direction
-function snapToClosestSection(scrollDown) {
-    if (isSnapping) return;
-    isSnapping = true;
-
-    const viewportHeight = window.innerHeight;
-    let closestSection = null;
-    let closestDistance = Infinity; // Start with a large number
-
-    sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        const sectionTop = rect.top; // Distance from top of viewport to top of section
-        const sectionBottom = rect.bottom; // Distance from top of viewport to bottom of section
-
-        // Only consider sections that are currently in the viewport
-        if (sectionTop < viewportHeight && sectionBottom > 0) {
-            const distance = Math.abs(sectionTop); // Distance from top of viewport
-
-            // Update closest section based on scroll direction
-            if (scrollDown) {
-                if (distance < closestDistance && sectionTop >= 0) {
-                    closestDistance = distance;
-                    closestSection = section; // Select the closest section while scrolling down
-                }
-            } else {
-                if (distance < closestDistance && sectionBottom <= viewportHeight) {
-                    closestDistance = distance;
-                    closestSection = section; // Select the closest section while scrolling up
-                }
-            }
-        }
-    });
-
-    // Scroll smoothly to the closest section if found
-    if (closestSection) {
-        closestSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // Reset snapping after scroll completes
-    setTimeout(() => {
-        isSnapping = false;
-    }, 600); // Adjust duration as needed
+function scrollToSection(index) {
+    if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds scrolling
+    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    currentSection = index; // Update the current section index
 }
 
-// Listen for the scroll event to determine the direction
-window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout); // Clear previous timeout if still scrolling
+function handleScroll(event) {
+    event.preventDefault(); // Prevent default scrolling behavior
 
-    // Determine if user is scrolling down or up
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollDown = scrollTop > lastScrollTop;
-    lastScrollTop = scrollTop;
+    // Prevent multiple scroll actions if already scrolling
+    if (isScrolling) return;
 
-    // Set a timeout to snap to the closest section after the user stops scrolling
-    scrollTimeout = setTimeout(() => snapToClosestSection(scrollDown), 150); // Adjust delay as needed
+    isScrolling = true; // Set scrolling flag
+
+    // Scroll to the next section based on scroll direction
+    if (event.deltaY > 0) {
+        scrollToSection(currentSection + 1); // Scroll down
+    } else {
+        scrollToSection(currentSection - 1); // Scroll up
+    }
+
+    // Reset isScrolling after a timeout
+    setTimeout(() => {
+        isScrolling = false; // Allow scrolling again after the timeout
+    }, SCROLL_TIMEOUT);
+}
+
+// Attach the handleScroll function to the mouse wheel event
+window.addEventListener('wheel', handleScroll, { passive: false });
+
+// Touch events for mobile
+let touchStartY = 0;
+let touchEndY = 0;
+
+window.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0].clientY; // Capture the starting touch position
 });
 
+window.addEventListener('touchend', (event) => {
+    touchEndY = event.changedTouches[0].clientY; // Capture the ending touch position
+    const deltaY = touchEndY - touchStartY; // Calculate the swipe distance
+
+    // Only trigger scrolling if the swipe distance exceeds the minimum
+    if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE) {
+        // Determine the swipe direction and scroll accordingly
+        if (deltaY < 0) {
+            scrollToSection(currentSection + 1); // Swiping up
+        } else if (deltaY > 0) {
+            scrollToSection(currentSection - 1); // Swiping down
+        }
+    }
+});
+
+// Optional: Prevent default behavior for touch events to avoid scrolling in the browser
+window.addEventListener('touchmove', (event) => {
+    event.preventDefault();
+}, { passive: false });
 
 
 
