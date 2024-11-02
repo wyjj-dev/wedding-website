@@ -82,7 +82,7 @@ let isScrolling = false; // Flag to prevent multiple scrolls
 
 function scrollToSection(index) {
     if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds scrolling
-    sections[index].scrollIntoView({ behavior: 'smooth', block: 'end' }); // Scroll to the bottom
+    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
     currentSection = index; // Update the current section index
 }
 
@@ -132,6 +132,11 @@ window.addEventListener('touchend', (event) => {
         }
     }
 });
+
+// Optional: Prevent default behavior for touch events to avoid scrolling in the browser
+window.addEventListener('touchmove', (event) => {
+    event.preventDefault();
+}, { passive: false });
 
 
 
