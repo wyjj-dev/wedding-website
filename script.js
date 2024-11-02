@@ -74,31 +74,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // //Scoll effect
+// Scroll effect
 const sections = document.querySelectorAll('section');
 let currentSection = 0;
 const MIN_SWIPE_DISTANCE = 100; // Minimum swipe distance in pixels to trigger scrolling
 const SCROLL_TIMEOUT = 600; // Timeout duration to limit scroll events
 let isScrolling = false; // Flag to prevent multiple scrolls
 
+// Function to scroll precisely to a section, aligning its bottom with the viewport's bottom
 function scrollToSection(index) {
     if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds scrolling
-    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    sections[index].scrollIntoView({ behavior: 'smooth', block: 'end' });
     currentSection = index; // Update the current section index
 }
 
+// Ensure complete scroll to the section without stopping in the middle
 function handleScroll(event) {
     event.preventDefault(); // Prevent default scrolling behavior
 
     // Prevent multiple scroll actions if already scrolling
     if (isScrolling) return;
-
     isScrolling = true; // Set scrolling flag
 
-    // Scroll to the next section based on scroll direction
+    // Detect scroll direction and scroll to the next or previous section
     if (event.deltaY > 0) {
-        scrollToSection(currentSection + 1); // Scroll down
+        // Scroll down if we're not on the last section
+        if (currentSection < sections.length - 1) {
+            scrollToSection(currentSection + 1);
+        }
     } else {
-        scrollToSection(currentSection - 1); // Scroll up
+        // Scroll up if we're not on the first section
+        if (currentSection > 0) {
+            scrollToSection(currentSection - 1);
+        }
     }
 
     // Reset isScrolling after a timeout
@@ -125,10 +133,10 @@ window.addEventListener('touchend', (event) => {
     // Only trigger scrolling if the swipe distance exceeds the minimum
     if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE) {
         // Determine the swipe direction and scroll accordingly
-        if (deltaY < 0) {
-            scrollToSection(currentSection + 1); // Swiping up
-        } else if (deltaY > 0) {
-            scrollToSection(currentSection - 1); // Swiping down
+        if (deltaY < 0 && currentSection < sections.length - 1) {
+            scrollToSection(currentSection + 1); // Swipe up to go down
+        } else if (deltaY > 0 && currentSection > 0) {
+            scrollToSection(currentSection - 1); // Swipe down to go up
         }
     }
 });
@@ -137,6 +145,7 @@ window.addEventListener('touchend', (event) => {
 window.addEventListener('touchmove', (event) => {
     event.preventDefault();
 }, { passive: false });
+
 
 
 
