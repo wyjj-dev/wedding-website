@@ -1,5 +1,3 @@
-//Disable iPad zooming
-
 document.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
         event.preventDefault(); // Prevents pinch-to-zoom
@@ -17,33 +15,41 @@ document.addEventListener('touchend', function (event) {
 
 
 
+// Start from top no matter what
+window.addEventListener('load', function () {
+    window.scrollTo(0, 0);
+});
 
-//Loading Page & scroll to top
+
+// Loading Page
 document.addEventListener("DOMContentLoaded", function() {
     const loadingScreen = document.getElementById('loading-screen');
+    const body = document.body; // Get the body element
 
     // Add the visible class to start the fade-in effect
     loadingScreen.classList.add('visible');
 
+    // Add the no-scroll class to the body to prevent scrolling
+    body.classList.add('no-scroll');
+
     // Wait for the window load event (which ensures all images, fonts, etc., are loaded)
     window.onload = function() {
-        // Once everything is loaded, wait for 1 second, then start fading out the loading screen
+        // Once everything is loaded, wait for 1 second, then fade out the loading screen
         setTimeout(() => {
-            window.scrollTo(0, 0); // Scroll to the top before fade-out begins
-
             // Add the hidden class to trigger the fade-out effect
             loadingScreen.classList.add('hidden');
             
             // After the fade-out animation is done, remove the loading screen from the DOM
             setTimeout(() => {
                 loadingScreen.style.display = 'none'; // Or loadingScreen.remove() to remove it entirely
+                
+                // Check if the class is being removed
+                console.log('Removing no-scroll class');
+                body.classList.remove('no-scroll'); // Remove no-scroll class to allow scrolling again
             }, 2000); // Match this duration with the CSS transition duration
         }, 4000); // Optional delay before starting fade-out
     };
 });
-
-
-
 
 
 
