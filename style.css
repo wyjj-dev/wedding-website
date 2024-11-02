@@ -417,10 +417,6 @@ section {
     width: 100%;
 }
 
-.chinese{
-    font-size: min(2.5vw, 2.5vh);
-}
-
 /* Answer containers start hidden */
 .answer-container {
     display: none;

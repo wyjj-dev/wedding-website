@@ -112,6 +112,10 @@
         font-size: min(3vw, 3vh);
     }
 
+    .chinese{
+        font-size: min(3.3vw, 3.3vh);
+    }
+
     #languageToggle {
         font-size: min(3vw, 3vh);
         height: min(5vw, 5vh);
