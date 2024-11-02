@@ -259,6 +259,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: min(7vw, 7vh);
 }
 
 .timeline-container{
