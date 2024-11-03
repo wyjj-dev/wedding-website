@@ -466,12 +466,12 @@ section {
     padding-top: 10px;
     border-top: 2px dotted #3d6ca8;
     display: flex;
-    align-items: center;
 }
 
 .question-container img{
     height: min(3.5vw, 3.5vh);
     padding-right: min(1vw, 1vh);
+    padding-top: min(0.5vw, 0.5vh);
 }
 
 /* Remove top border from the first question in the FAQ section */

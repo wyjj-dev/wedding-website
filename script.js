@@ -163,7 +163,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Scroll effect
-
 const sections = document.querySelectorAll('section');
 let currentSection = 0;
 const MIN_SWIPE_DISTANCE = 100; // Minimum swipe distance in pixels to trigger scrolling
@@ -179,11 +178,14 @@ function scrollToSection(index) {
 function handleScroll(event) {
     // Check if the scroll event originated from within the FAQ section
     const faqSection = document.querySelector('.faq-bottom-container'); // Adjust selector if necessary
+
     if (faqSection.contains(event.target)) {
-        return; // Allow normal scrolling within the FAQ section
+        // Prevent page scrolling when the FAQ section is being scrolled
+        event.stopPropagation(); // Stop the event from propagating
+        return; // Allow default scrolling behavior within the FAQ section
     }
 
-    event.preventDefault(); // Prevent default scrolling behavior
+    event.preventDefault(); // Prevent default scrolling behavior when not in the FAQ section
 
     // Prevent multiple scroll actions if already scrolling
     if (isScrolling) return;
@@ -229,14 +231,27 @@ window.addEventListener('touchend', (event) => {
     }
 });
 
-// Optional: Prevent default behavior for touch events to avoid scrolling in the browser
+// Prevent default behavior for touch events to avoid scrolling in the browser
 window.addEventListener('touchmove', (event) => {
     const faqSection = document.querySelector('.faq-bottom-container'); // Adjust selector if necessary
     if (faqSection.contains(event.target)) {
+        event.stopPropagation(); // Prevent page scrolling
         return; // Allow normal touch scrolling within the FAQ section
     }
-    event.preventDefault();
+    event.preventDefault(); // Prevent default scrolling behavior when not in the FAQ section
 }, { passive: false });
+
+// Prevent scrolling in the FAQ section and allow normal scrolling behavior for questions
+faqSection.addEventListener('wheel', (event) => {
+    event.stopPropagation(); // Stop the scroll event from bubbling up
+}, { passive: false });
+
+faqSection.addEventListener('touchmove', (event) => {
+    event.stopPropagation(); // Stop the touch event from bubbling up
+}, { passive: false });
+
+
+
 
 
 
