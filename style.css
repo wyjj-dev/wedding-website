@@ -278,8 +278,12 @@ section {
     color: #3d6ca8;
 }
 
+.mobile-center{
+    padding-top: min(2vh, 2vw);
+}
+
 .loc-text{
-    padding-top: min(2vh, 2vw) 
+    padding-top: min(2vh, 2vw);
 }
 
 .loc-text a, .date-text a {
