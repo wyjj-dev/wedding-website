@@ -32,6 +32,17 @@
         height: 5px;
     }
 
+    .sidebar {
+        position: fixed;
+        top: 50%;
+        right: 10px; /* Adjust as needed to position on the side */
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 4px; /* Space between dots */
+        z-index: 1000; /* Ensure it stays on top */
+    }
+
 
     /* Info page */
 

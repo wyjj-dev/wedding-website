@@ -42,18 +42,6 @@ section {
 
 /* Sidebar Styling */
 .sidebar {
-    position: fixed;
-    top: 50%;
-    right: 10px; /* Adjust as needed to position on the side */
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 5px; /* Space between dots */
-    z-index: 1000; /* Ensure it stays on top */
-}
-
-/* Hide sidebar when loading */
-.sidebar-hidden {
     display: none;
 }
 
@@ -61,7 +49,7 @@ section {
 .dot {
     width: 10px;
     height: 10px;
-    background-color: #cccccca1;
+    background-color: #3d6ba83a;
     border-radius: 50%;
     display: block;
     transition: background-color 0.3s;
@@ -69,7 +57,7 @@ section {
 
 /* Active Dot Style */
 .dot.active {
-    background-color: #33333360; /* Highlighted color */
+    background-color: #3d6ba886; /* Highlighted color */
 }
 
 

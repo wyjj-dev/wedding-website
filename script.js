@@ -15,7 +15,7 @@ document.addEventListener('touchend', function (event) {
 
 
 // Function to detect the current section in view
-function updateActiveDot() {
+function updateActiveSection() {
     const sections = document.querySelectorAll('section');
     let currentSection = '';
 
@@ -38,8 +38,8 @@ function updateActiveDot() {
     });
 }
 
-// Run updateActiveDot on scroll
-document.addEventListener('scroll', updateActiveDot);
+// Trigger scroll detection on scroll
+document.addEventListener('scroll', updateActiveSection);
 
 
 
@@ -71,13 +71,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 loadingScreen.style.display = 'none';
                 document.body.style.overflow = ''; // Re-enable scrolling
                 sidebar.classList.remove('sidebar-hidden'); // Show sidebar dots
+                
+                // Update active section immediately after loading screen disappears
+                updateActiveSection();
             }, 2000); // Match this with the CSS transition duration
         }, 4000); // Optional delay before starting fade-out
     };
 });
-
-
-
 
 
 // fade in page
