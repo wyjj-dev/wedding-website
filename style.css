@@ -61,7 +61,7 @@ section {
 .dot {
     width: 10px;
     height: 10px;
-    background-color: #ccc;
+    background-color: #cccccca1;
     border-radius: 50%;
     display: block;
     transition: background-color 0.3s;
@@ -69,7 +69,7 @@ section {
 
 /* Active Dot Style */
 .dot.active {
-    background-color: #333; /* Highlighted color */
+    background-color: #33333360; /* Highlighted color */
 }
 
 

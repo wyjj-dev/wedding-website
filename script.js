@@ -15,7 +15,7 @@ document.addEventListener('touchend', function (event) {
 
 
 // Function to detect the current section in view
-document.addEventListener('scroll', function() {
+function updateActiveDot() {
     const sections = document.querySelectorAll('section');
     let currentSection = '';
 
@@ -36,7 +36,10 @@ document.addEventListener('scroll', function() {
             dot.classList.add('active'); // Add 'active' class to the current dot
         }
     });
-});
+}
+
+// Run updateActiveDot on scroll
+document.addEventListener('scroll', updateActiveDot);
 
 
 
