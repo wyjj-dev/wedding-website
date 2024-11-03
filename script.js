@@ -14,6 +14,31 @@ document.addEventListener('touchend', function (event) {
 }, { passive: false });
 
 
+// Function to detect the current section in view
+document.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section');
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        // Check if section is in viewport
+        if (window.scrollY >= sectionTop - sectionHeight / 3) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+
+    // Update active dot based on current section
+    document.querySelectorAll('.dot').forEach(dot => {
+        dot.classList.remove('active'); // Remove 'active' class from all dots
+        if (dot.getAttribute('href').substring(1) === currentSection) {
+            dot.classList.add('active'); // Add 'active' class to the current dot
+        }
+    });
+});
+
+
 
 // Scroll to Top on Page Load or Refresh
 window.addEventListener("load", function() {
@@ -23,6 +48,7 @@ window.addEventListener("load", function() {
 // Loading Screen Logic
 document.addEventListener("DOMContentLoaded", function() {
     const loadingScreen = document.getElementById('loading-screen');
+    const sidebar = document.querySelector('.sidebar');
 
     // Add the visible class to start the fade-in effect
     loadingScreen.classList.add('visible');
@@ -37,14 +63,16 @@ document.addEventListener("DOMContentLoaded", function() {
             // Add the hidden class to start fade-out
             loadingScreen.classList.add('hidden');
             
-            // After fade-out, remove loading screen and re-enable scrolling
+            // After fade-out, remove loading screen, re-enable scrolling, and show sidebar
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
                 document.body.style.overflow = ''; // Re-enable scrolling
+                sidebar.classList.remove('sidebar-hidden'); // Show sidebar dots
             }, 2000); // Match this with the CSS transition duration
         }, 4000); // Optional delay before starting fade-out
     };
 });
+
 
 
 

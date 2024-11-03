@@ -26,6 +26,12 @@
         justify-content: center;
     }
 
+    /* Side Bar */
+    .dot {
+        width: 5px;
+        height: 5px;
+    }
+
 
     /* Info page */
 

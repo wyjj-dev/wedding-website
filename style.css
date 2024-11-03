@@ -40,6 +40,40 @@ section {
 }
 
 
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    top: 50%;
+    right: 10px; /* Adjust as needed to position on the side */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Space between dots */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Hide sidebar when loading */
+.sidebar-hidden {
+    display: none;
+}
+
+/* Dot Style */
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+/* Active Dot Style */
+.dot.active {
+    background-color: #333; /* Highlighted color */
+}
+
+
+
 /* Loading Screen */
 /* Loading Screen CSS */
 #loading-screen {
@@ -247,7 +281,10 @@ section {
     font-size: min(2vw, 2vh);
     font-family: 'sarlotte';
     color: #3d6ca8;
-    padding-top: min(1vh, 1vw);
+}
+
+.loc-text{
+    padding-top: min(2vh, 2vw) 
 }
 
 .loc-text a, .date-text a {
@@ -256,7 +293,6 @@ section {
     width: auto; /* Ensure it takes the full width available */
     color: #3d6ca8;       /* Match your text color */
     white-space: nowrap;
-    padding-top: 0.5vh;
     text-decoration: underline dotted;
     text-decoration-thickness: min(0.3vh, 0.3vw);
 }
