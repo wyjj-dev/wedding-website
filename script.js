@@ -177,6 +177,12 @@ function scrollToSection(index) {
 }
 
 function handleScroll(event) {
+    // Check if the scroll event originated from within the FAQ section
+    const faqSection = document.querySelector('.faq-bottom-container'); // Adjust selector if necessary
+    if (faqSection.contains(event.target)) {
+        return; // Allow normal scrolling within the FAQ section
+    }
+
     event.preventDefault(); // Prevent default scrolling behavior
 
     // Prevent multiple scroll actions if already scrolling
@@ -225,6 +231,10 @@ window.addEventListener('touchend', (event) => {
 
 // Optional: Prevent default behavior for touch events to avoid scrolling in the browser
 window.addEventListener('touchmove', (event) => {
+    const faqSection = document.querySelector('.faq-bottom-container'); // Adjust selector if necessary
+    if (faqSection.contains(event.target)) {
+        return; // Allow normal touch scrolling within the FAQ section
+    }
     event.preventDefault();
 }, { passive: false });
 

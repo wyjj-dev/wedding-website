@@ -446,6 +446,8 @@ section {
     padding: min(2vw, 2vh);
     font-size: min(2vw, 2vh);
     width: 100%;
+    max-height: 70%;
+    overflow-y: auto;
 }
 
 /* Answer containers start hidden */
