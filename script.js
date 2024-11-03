@@ -48,6 +48,8 @@ window.addEventListener("load", function() {
     window.scrollTo(0, 0); // Instantly scroll to top on page load
 });
 
+
+
 // Loading Screen Logic
 document.addEventListener("DOMContentLoaded", function() {
     const loadingScreen = document.getElementById('loading-screen');
@@ -59,25 +61,53 @@ document.addEventListener("DOMContentLoaded", function() {
     // Prevent scrolling while the loading screen is visible
     document.body.style.overflow = 'hidden';
 
+    // Initially hide the sidebar to ensure it does not show during loading
+    sidebar.classList.add('sidebar-hidden');
+    
     // Wait for all resources to load
     window.onload = function() {
-        // Start fade-out process after a delay (adjust delay as needed)
+        // Start fade-out process after a delay
         setTimeout(() => {
             // Add the hidden class to start fade-out
             loadingScreen.classList.add('hidden');
             
-            // After fade-out, remove loading screen, re-enable scrolling, and show sidebar
+            // After fade-out, remove loading screen and show sidebar
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
                 document.body.style.overflow = ''; // Re-enable scrolling
-                sidebar.classList.remove('sidebar-hidden'); // Show sidebar dots
-                
-                // Update active section immediately after loading screen disappears
+                // No need to show the sidebar here yet
                 updateActiveSection();
             }, 2000); // Match this with the CSS transition duration
         }, 4000); // Optional delay before starting fade-out
     };
 });
+
+// Function to show the sidebar with fade in/out effect
+let sidebarTimeout;
+
+document.addEventListener('scroll', function() {
+    const sidebar = document.querySelector('.sidebar');
+
+    // Show the sidebar when scrolling
+    sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
+    sidebar.style.opacity = '1'; // Make sidebar visible
+
+    // Clear the previous timeout if scroll event is detected again
+    clearTimeout(sidebarTimeout);
+
+    // Set a timeout to hide the sidebar after 5 seconds of no scrolling
+    sidebarTimeout = setTimeout(() => {
+        sidebar.style.opacity = '0'; // Fade out the sidebar
+
+        // After fading out, set display to none
+        setTimeout(() => {
+            sidebar.classList.add('sidebar-hidden'); // Hide the sidebar after fading out
+        }, 500); // Match this with the CSS transition duration
+    }, 5000); // 5000 milliseconds = 5 seconds
+});
+
+
+
 
 
 // fade in page

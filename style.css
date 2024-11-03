@@ -42,12 +42,14 @@ section {
 
 /* Sidebar Styling */
 .sidebar {
-    display: none;
+    display: none; /* Initially hidden */
+    opacity: 0; /* Start as invisible for fade-in effect */
+    transition: opacity 0.5s ease-in-out; /* Transition for fading in/out */
 }
 
 /* Dot Style */
 .dot {
-    width: 10px;
+    width: 10px; /* Default dot size for desktop */
     height: 10px;
     background-color: #3d6ba83a;
     border-radius: 50%;
@@ -58,6 +60,11 @@ section {
 /* Active Dot Style */
 .dot.active {
     background-color: #3d6ba886; /* Highlighted color */
+}
+
+.sidebar-hidden {
+    display: none; /* Keep sidebar hidden when loading */
+    opacity: 0; /* Ensure opacity is zero when hidden */
 }
 
 

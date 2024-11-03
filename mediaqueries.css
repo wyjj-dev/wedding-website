@@ -28,7 +28,7 @@
 
     /* Side Bar */
     .dot {
-        width: 5px;
+        width: 5px; /* Dot size for mobile */
         height: 5px;
     }
 
