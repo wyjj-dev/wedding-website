@@ -71,11 +71,13 @@ document.addEventListener("DOMContentLoaded", function() {
             // Add the hidden class to start fade-out
             loadingScreen.classList.add('hidden');
             
-            // After fade-out, remove loading screen and show sidebar
+            // After fade-out, remove loading screen, re-enable scrolling, and show sidebar
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
                 document.body.style.overflow = ''; // Re-enable scrolling
-                // No need to show the sidebar here yet
+
+                // Show sidebar for 5 seconds
+                showSidebarForDuration(5000); // Show sidebar for 5 seconds
                 updateActiveSection();
             }, 2000); // Match this with the CSS transition duration
         }, 4000); // Optional delay before starting fade-out
@@ -85,6 +87,27 @@ document.addEventListener("DOMContentLoaded", function() {
 // Function to show the sidebar with fade in/out effect
 let sidebarTimeout;
 
+function showSidebarForDuration(duration) {
+    const sidebar = document.querySelector('.sidebar');
+    
+    sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
+    sidebar.style.opacity = '1'; // Make sidebar visible
+
+    // Clear the previous timeout if scroll event is detected again
+    clearTimeout(sidebarTimeout);
+
+    // Set a timeout to hide the sidebar after the specified duration
+    sidebarTimeout = setTimeout(() => {
+        sidebar.style.opacity = '0'; // Fade out the sidebar
+
+        // After fading out, set display to none
+        setTimeout(() => {
+            sidebar.classList.add('sidebar-hidden'); // Hide the sidebar after fading out
+        }, 500); // Match this with the CSS transition duration
+    }, duration); // Use the passed duration (5000 milliseconds = 5 seconds)
+}
+
+// Event listener for scrolling
 document.addEventListener('scroll', function() {
     const sidebar = document.querySelector('.sidebar');
 
@@ -105,6 +128,7 @@ document.addEventListener('scroll', function() {
         }, 500); // Match this with the CSS transition duration
     }, 5000); // 5000 milliseconds = 5 seconds
 });
+
 
 
 
