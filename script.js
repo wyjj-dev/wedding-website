@@ -21,8 +21,10 @@ window.addEventListener("load", function() {
 });
 
 // Loading Screen Logic
+// Loading Screen Logic
 document.addEventListener("DOMContentLoaded", function() {
     const loadingScreen = document.getElementById('loading-screen');
+    const sidebar = document.querySelector('.sidebar');
 
     // Add the visible class to start the fade-in effect
     loadingScreen.classList.add('visible');
@@ -30,21 +32,104 @@ document.addEventListener("DOMContentLoaded", function() {
     // Prevent scrolling while the loading screen is visible
     document.body.style.overflow = 'hidden';
 
+    // Initially hide the sidebar to ensure it does not show during loading
+    sidebar.classList.add('sidebar-hidden');
+    
     // Wait for all resources to load
     window.onload = function() {
-        // Start fade-out process after a delay (adjust delay as needed)
+        // Start fade-out process after a delay
         setTimeout(() => {
             // Add the hidden class to start fade-out
             loadingScreen.classList.add('hidden');
             
-            // After fade-out, remove loading screen and re-enable scrolling
+            // After fade-out, remove loading screen, re-enable scrolling, and show sidebar
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
                 document.body.style.overflow = ''; // Re-enable scrolling
+
+                // Show sidebar for 5 seconds
+                showSidebarForDuration(5000); // Show sidebar for 5 seconds
+                updateActiveSection(); // Immediately update active section after loading screen disappears
             }, 2000); // Match this with the CSS transition duration
         }, 4000); // Optional delay before starting fade-out
     };
 });
+
+// Function to show the sidebar with fade in/out effect
+let sidebarTimeout;
+
+function showSidebarForDuration(duration) {
+    const sidebar = document.querySelector('.sidebar');
+    
+    sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
+    sidebar.style.opacity = '1'; // Make sidebar visible
+    updateActiveSection(); // Update active dot whenever sidebar appears
+
+    // Clear the previous timeout if scroll event is detected again
+    clearTimeout(sidebarTimeout);
+
+    // Set a timeout to hide the sidebar after the specified duration
+    sidebarTimeout = setTimeout(() => {
+        sidebar.style.opacity = '0'; // Fade out the sidebar
+
+        // After fading out, set display to none
+        setTimeout(() => {
+            sidebar.classList.add('sidebar-hidden'); // Hide the sidebar after fading out
+        }, 500); // Match this with the CSS transition duration
+    }, duration); // Use the passed duration (5000 milliseconds = 5 seconds)
+}
+
+// Function to detect the current section in view
+function updateActiveSection() {
+    const sections = document.querySelectorAll('section');
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        // Check if section is in viewport
+        if (window.scrollY >= sectionTop - sectionHeight / 3) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+
+    // Update active dot based on current section
+    document.querySelectorAll('.dot').forEach(dot => {
+        dot.classList.remove('active'); // Remove 'active' class from all dots
+        if (dot.getAttribute('href').substring(1) === currentSection) {
+            dot.classList.add('active'); // Add 'active' class to the current dot
+        }
+    });
+}
+
+// Event listener for scrolling
+document.addEventListener('scroll', function() {
+    const sidebar = document.querySelector('.sidebar');
+
+    // Show the sidebar when scrolling
+    sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
+    sidebar.style.opacity = '1'; // Make sidebar visible
+
+    // Clear the previous timeout if scroll event is detected again
+    clearTimeout(sidebarTimeout);
+
+    // Update active section as user scrolls
+    updateActiveSection();
+
+    // Set a timeout to hide the sidebar after 5 seconds of no scrolling
+    sidebarTimeout = setTimeout(() => {
+        sidebar.style.opacity = '0'; // Fade out the sidebar
+
+        // After fading out, set display to none
+        setTimeout(() => {
+            sidebar.classList.add('sidebar-hidden'); // Hide the sidebar after fading out
+        }, 200); // Match this with the CSS transition duration
+    }, 2000); // 5000 milliseconds = 5 seconds
+});
+
+
+
 
 
 
