@@ -289,7 +289,7 @@ section {
     color: #3d6ca8;       /* Match your text color */
     white-space: nowrap;
     text-decoration: underline dotted;
-    text-decoration-thickness: min(0.3vh, 0.3vw);
+    text-decoration-thickness: 2px;
 }
 
 /* RSVP Section */
@@ -450,7 +450,7 @@ section {
 .faq-link {
     color: #3d6ca8;       /* Match your text color */
     text-decoration: underline dotted;
-    text-decoration-thickness: min(0.2vh, 0.2vw);
+    text-decoration-thickness: 2px;
 }
 
 /* Answer containers start hidden */

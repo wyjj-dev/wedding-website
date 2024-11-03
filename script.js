@@ -15,12 +15,15 @@ document.addEventListener('touchend', function (event) {
 
 
 
-// Scroll to Top on Page Load or Refresh
+// Scroll to Top on Page Load or Refresh with Delay for iOS Compatibility
 window.addEventListener("load", function() {
-    window.scrollTo(0, 0); // Instantly scroll to top on page load
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 10); // Delay by 10ms to ensure readiness
 });
 
-// Loading Screen Logic
+
+
 // Loading Screen Logic
 document.addEventListener("DOMContentLoaded", function() {
     const loadingScreen = document.getElementById('loading-screen');
