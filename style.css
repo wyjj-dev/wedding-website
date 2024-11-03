@@ -282,10 +282,6 @@ section {
     padding-top: min(2vh, 2vw);
 }
 
-.loc-text{
-    padding-top: min(2vh, 2vw);
-}
-
 .loc-text a, .date-text a {
     display: flex;
     align-items: center; /* Center vertically */
