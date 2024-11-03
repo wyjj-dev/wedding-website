@@ -15,43 +15,33 @@ document.addEventListener('touchend', function (event) {
 
 
 
-// Start from top no matter what
-window.addEventListener('load', function () {
-    // Using setTimeout to ensure layout has stabilized
-    setTimeout(() => {
-        window.scrollTo(0, 0);
-    }, 100); // Short delay to ensure the page is ready
+// Scroll to Top on Page Load or Refresh
+window.addEventListener("load", function() {
+    window.scrollTo(0, 0); // Instantly scroll to top on page load
 });
 
-// Loading Page
+// Loading Screen Logic
 document.addEventListener("DOMContentLoaded", function() {
     const loadingScreen = document.getElementById('loading-screen');
-    const body = document.body; // Get the body element
 
     // Add the visible class to start the fade-in effect
     loadingScreen.classList.add('visible');
 
-    // Add the no-scroll class to the body to prevent scrolling
-    body.classList.add('no-scroll');
+    // Prevent scrolling while the loading screen is visible
+    document.body.style.overflow = 'hidden';
 
-    // Wait for the window load event (which ensures all images, fonts, etc., are loaded)
+    // Wait for all resources to load
     window.onload = function() {
-        // Once everything is loaded, wait for 1 second, then fade out the loading screen
+        // Start fade-out process after a delay (adjust delay as needed)
         setTimeout(() => {
-            // Scroll to the top after a slight delay
-            window.scrollTo(0, 0); // Ensure it scrolls to the top
-            
-            // Add the hidden class to trigger the fade-out effect
+            // Add the hidden class to start fade-out
             loadingScreen.classList.add('hidden');
-
-            // After the fade-out animation is done, remove the loading screen from the DOM
+            
+            // After fade-out, remove loading screen and re-enable scrolling
             setTimeout(() => {
-                loadingScreen.style.display = 'none'; // Or loadingScreen.remove() to remove it entirely
-                
-                // Check if the class is being removed
-                console.log('Removing no-scroll class');
-                body.classList.remove('no-scroll'); // Remove no-scroll class to allow scrolling again
-            }, 2000); // Match this duration with the CSS transition duration
+                loadingScreen.style.display = 'none';
+                document.body.style.overflow = ''; // Re-enable scrolling
+            }, 2000); // Match this with the CSS transition duration
         }, 4000); // Optional delay before starting fade-out
     };
 });
