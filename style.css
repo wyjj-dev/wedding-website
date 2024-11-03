@@ -447,6 +447,12 @@ section {
     width: 100%;
 }
 
+.faq-link {
+    color: #3d6ca8;       /* Match your text color */
+    text-decoration: underline dotted;
+    text-decoration-thickness: min(0.2vh, 0.2vw);
+}
+
 /* Answer containers start hidden */
 .answer-container {
     display: none;
