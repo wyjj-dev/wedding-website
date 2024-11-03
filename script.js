@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const sections = document.querySelectorAll('section');
 let currentSection = 0;
 const MIN_SWIPE_DISTANCE = 100; // Minimum swipe distance in pixels to trigger scrolling
-const SCROLL_TIMEOUT = 600; // Timeout duration to limit scroll events
+const SCROLL_TIMEOUT = 1500; // Timeout duration to limit scroll events
 let isScrolling = false; // Flag to prevent multiple scrolls
 
 function scrollToSection(index) {
