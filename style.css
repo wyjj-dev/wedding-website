@@ -446,8 +446,6 @@ section {
     padding: min(2vw, 2vh);
     font-size: min(2vw, 2vh);
     width: 100%;
-    max-height: 70%;
-    overflow-y: auto;
 }
 
 /* Answer containers start hidden */
@@ -457,6 +455,8 @@ section {
     padding-right: min(8vw, 8vh);
     transition: all 0.3s ease;
     text-align: justify;
+    max-height: 200px; /* or whatever height you want */
+    overflow-y: auto; /* Enable scrolling within this container */
 }
 
 /* Question hover effect for better UX */

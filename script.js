@@ -176,16 +176,18 @@ function scrollToSection(index) {
 }
 
 function handleScroll(event) {
-    // Check if the scroll event originated from within the FAQ section
-    const faqSection = document.querySelector('.faq-bottom-container'); // Adjust selector if necessary
+    const target = event.target;
 
-    if (faqSection.contains(event.target)) {
-        // Prevent page scrolling when the FAQ section is being scrolled
-        event.stopPropagation(); // Stop the event from propagating
-        return; // Allow default scrolling behavior within the FAQ section
+    // Check if we are scrolling within an answer container
+    const isInsideAnswer = target.closest('.answer-container');
+
+    // If scrolling within an answer, let it scroll
+    if (isInsideAnswer) {
+        // Allow the native scroll to happen
+        return; // Exit the function to allow default behavior
     }
 
-    event.preventDefault(); // Prevent default scrolling behavior when not in the FAQ section
+    event.preventDefault(); // Prevent default scrolling behavior for the main sections
 
     // Prevent multiple scroll actions if already scrolling
     if (isScrolling) return;
@@ -231,24 +233,21 @@ window.addEventListener('touchend', (event) => {
     }
 });
 
-// Prevent default behavior for touch events to avoid scrolling in the browser
+// Optional: Prevent default behavior for touch events to avoid scrolling in the browser
 window.addEventListener('touchmove', (event) => {
-    const faqSection = document.querySelector('.faq-bottom-container'); // Adjust selector if necessary
-    if (faqSection.contains(event.target)) {
-        event.stopPropagation(); // Prevent page scrolling
-        return; // Allow normal touch scrolling within the FAQ section
+    const target = event.target;
+    // Allow touchmove within answer containers
+    const isInsideAnswer = target.closest('.answer-container');
+    if (!isInsideAnswer) {
+        event.preventDefault(); // Prevent default if not inside answer container
     }
-    event.preventDefault(); // Prevent default scrolling behavior when not in the FAQ section
 }, { passive: false });
 
-// Prevent scrolling in the FAQ section and allow normal scrolling behavior for questions
-faqSection.addEventListener('wheel', (event) => {
-    event.stopPropagation(); // Stop the scroll event from bubbling up
-}, { passive: false });
 
-faqSection.addEventListener('touchmove', (event) => {
-    event.stopPropagation(); // Stop the touch event from bubbling up
-}, { passive: false });
+
+
+
+
 
 
 
