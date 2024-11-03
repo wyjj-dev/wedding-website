@@ -437,7 +437,7 @@ section {
     font-family: 'sarlotte';
     font-size: min(8vw, 8vh);
     color: #7439a8;
-    padding-top: min(8vw, 8vh);
+    padding-top: min(5vw, 5vh);
 }
 
 .faq-bottom-container {
@@ -472,7 +472,6 @@ section {
 .question-container img{
     height: min(3.5vw, 3.5vh);
     padding-right: min(1vw, 1vh);
-    padding-top: min(1vw, 1vh);
 }
 
 /* Remove top border from the first question in the FAQ section */

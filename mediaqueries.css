@@ -131,6 +131,10 @@
         font-size: min(3.3vw, 3.3vh);
     }
 
+    .question-container img {
+        padding-top: min(1vw, 1vh);
+    }
+
     #languageToggle {
         font-size: min(3vw, 3vh);
         height: min(5vw, 5vh);
