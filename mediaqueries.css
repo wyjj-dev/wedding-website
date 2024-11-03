@@ -121,12 +121,10 @@
     }
 
     /* FAQ Page */
-    .faq-container{
-        width: 90%;
-    }
     
     .faq-bottom-container {
         font-size: min(3vw, 3vh);
+        padding: min(2vw, 2vh);
     }
 
     .chinese{
@@ -141,5 +139,16 @@
 
     .button-bottom {
         padding-bottom: min(20vw, 20vh); /* Optional: adds some spacing from the bottom */
+    }
+}
+
+
+@media screen and (max-width: 380px) {
+    .faq-bottom-container {
+        font-size: min(2.5vw, 2.5vh);
+    }
+
+    .chinese {
+        font-size: min(2.8vw, 2.8vh);
     }
 }

@@ -426,7 +426,7 @@ section {
 
 .faq-container{
     height: 100vh;
-    width: 55vw;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -443,7 +443,6 @@ section {
 .faq-bottom-container {
     font-family: 'leelawadee';
     color: #3d6ca8;
-    padding: min(2vw, 2vh);
     font-size: min(2vw, 2vh);
     width: 100%;
 }
@@ -455,8 +454,6 @@ section {
     padding-right: min(8vw, 8vh);
     transition: all 0.3s ease;
     text-align: justify;
-    max-height: 200px; /* or whatever height you want */
-    overflow-y: auto; /* Enable scrolling within this container */
 }
 
 /* Question hover effect for better UX */
@@ -466,6 +463,10 @@ section {
     padding-top: 10px;
     border-top: 2px dotted #3d6ca8;
     display: flex;
+}
+
+.question-container div{
+    padding-top: min(0.5vw, 0.5vh);
 }
 
 .question-container img{
