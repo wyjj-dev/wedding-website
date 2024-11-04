@@ -124,7 +124,7 @@
     /* FAQ Page */
     
     .faq-bottom-container {
-        font-size: min(3vw, 3vh);
+        font-size: min(3.3vw, 3.3vh);
         padding: min(2vw, 2vh);
     }
 
@@ -138,8 +138,6 @@
 
     #languageToggle {
         font-size: min(3vw, 3vh);
-        height: min(5vw, 5vh);
-        width: min(8vw, 8vh);
     }
 
     .button-bottom {

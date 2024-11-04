@@ -62,11 +62,6 @@ section {
     background-color: #3d6ba886; /* Highlighted color */
 }
 
-.sidebar-hidden {
-    display: none; /* Keep sidebar hidden when loading */
-    opacity: 0; /* Ensure opacity is zero when hidden */
-}
-
 
 
 /* Loading Screen */
@@ -443,7 +438,7 @@ section {
 .faq-bottom-container {
     font-family: 'leelawadee';
     color: #3d6ca8;
-    font-size: min(2vw, 2vh);
+    font-size: min(2.2vw, 2.2vh);
     width: 100%;
 }
 
@@ -511,9 +506,9 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: min(1.5vw, 1.5vh);
-    height: min(3vw, 3vh);
-    width: min(6vw, 6vh);
+    font-size: min(2vw, 2vh);
+    height: min(5vw, 5vh);
+    width: min(15vw, 15vh);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 

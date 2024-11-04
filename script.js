@@ -58,28 +58,18 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 });
 
-// Function to show the sidebar with fade in/out effect
-let sidebarTimeout;
 
-function showSidebarForDuration(duration) {
+
+
+
+
+// Function to show the sidebar and update the active section
+function showSidebar() {
     const sidebar = document.querySelector('.sidebar');
     
     sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
     sidebar.style.opacity = '1'; // Make sidebar visible
     updateActiveSection(); // Update active dot whenever sidebar appears
-
-    // Clear the previous timeout if scroll event is detected again
-    clearTimeout(sidebarTimeout);
-
-    // Set a timeout to hide the sidebar after the specified duration
-    sidebarTimeout = setTimeout(() => {
-        sidebar.style.opacity = '0'; // Fade out the sidebar
-
-        // After fading out, set display to none
-        setTimeout(() => {
-            sidebar.classList.add('sidebar-hidden'); // Hide the sidebar after fading out
-        }, 500); // Match this with the CSS transition duration
-    }, duration); // Use the passed duration (5000 milliseconds = 5 seconds)
 }
 
 // Function to detect the current section in view
@@ -114,22 +104,13 @@ document.addEventListener('scroll', function() {
     sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
     sidebar.style.opacity = '1'; // Make sidebar visible
 
-    // Clear the previous timeout if scroll event is detected again
-    clearTimeout(sidebarTimeout);
-
     // Update active section as user scrolls
     updateActiveSection();
-
-    // Set a timeout to hide the sidebar after 5 seconds of no scrolling
-    sidebarTimeout = setTimeout(() => {
-        sidebar.style.opacity = '0'; // Fade out the sidebar
-
-        // After fading out, set display to none
-        setTimeout(() => {
-            sidebar.classList.add('sidebar-hidden'); // Hide the sidebar after fading out
-        }, 200); // Match this with the CSS transition duration
-    }, 2000); // 5000 milliseconds = 5 seconds
 });
+
+// Ensure the sidebar is visible on load
+window.addEventListener("load", showSidebar);
+
 
 
 
@@ -240,12 +221,13 @@ let currentLanguage = 'english'; // Default language
 document.addEventListener('DOMContentLoaded', function() {
     const languageToggleButton = document.getElementById('languageToggle');
 
+    // Set initial button text
+    languageToggleButton.innerText = 'EN/中文';
+
     // Add event listener to the language toggle button
     languageToggleButton.addEventListener('click', () => {
         // Toggle the current language
         currentLanguage = currentLanguage === 'english' ? 'chinese' : 'english';
-        // Update button text based on current language
-        languageToggleButton.innerText = currentLanguage === 'english' ? '中文' : 'ENG';
 
         // Call the function to toggle text visibility
         toggleLanguage();
@@ -254,6 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call toggleLanguage on initial load to ensure the correct language is shown
     toggleLanguage();
 });
+
+
 
 // Function to toggle language visibility in FAQ
 function toggleLanguage() {
