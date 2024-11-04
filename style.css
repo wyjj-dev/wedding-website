@@ -438,7 +438,7 @@ section {
 .faq-bottom-container {
     font-family: 'leelawadee';
     color: #3d6ca8;
-    font-size: min(2.2vw, 2.2vh);
+    font-size: min(2vw, 2vh);
     width: 100%;
 }
 
