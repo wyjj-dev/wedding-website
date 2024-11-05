@@ -142,10 +142,10 @@
     }
 
     .button-bottom {
-        padding-bottom: min(20vw, 20vh); /* Optional: adds some spacing from the bottom */
+        padding-bottom: min(25vw, 25vh); /* Optional: adds some spacing from the bottom */
     }
 
-    #languageToggle , #download{
+    #languageToggle , #downloadButton{
         font-size: min(2vw, 2vh);
         height: min(5vw, 5vh);
         width: min(15vw, 15vh);
@@ -153,7 +153,7 @@
 }
 
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 350px) {
     .faq-bottom-container {
         font-size: min(2.5vw, 2.5vh);
     }

@@ -241,12 +241,14 @@ window.addEventListener('touchmove', (event) => {
 
 //Translate
 // Toggle Language for FAQ
-let currentLanguage = 'english'; // Default language
+let currentLanguage = 'english';
 
 document.addEventListener('DOMContentLoaded', function() {
     const languageToggleButton = document.getElementById('languageToggle');
+    const downloadButton = document.getElementById('downloadButton');
+    const downloadLink = document.getElementById('downloadLink');
 
-    // Set initial button text
+    // Set initial button text for language toggle
     languageToggleButton.innerText = 'EN/中文';
 
     // Add event listener to the language toggle button
@@ -254,42 +256,59 @@ document.addEventListener('DOMContentLoaded', function() {
         // Toggle the current language
         currentLanguage = currentLanguage === 'english' ? 'chinese' : 'english';
 
-        // Call the function to toggle text visibility
+        // Update the download link and button text
+        updateDownloadLinkAndButton();
+
+        // Toggle FAQ text visibility
         toggleLanguage();
     });
 
-    // Call toggleLanguage on initial load to ensure the correct language is shown
+    // Initial function calls to set the correct language and download link
+    updateDownloadLinkAndButton();
     toggleLanguage();
 });
 
-
-
-// Function to toggle language visibility in FAQ
+// Function to toggle FAQ text visibility
 function toggleLanguage() {
-    // Select all question-answer pairs
     const questions = document.querySelectorAll('.Q-A');
 
     questions.forEach(question => {
-        // Select English and Chinese text divs for questions and answers
         const englishQuestion = question.querySelector('.question-container .english');
         const chineseQuestion = question.querySelector('.question-container .chinese');
         const englishAnswer = question.querySelector('.answer-container .english');
         const chineseAnswer = question.querySelector('.answer-container .chinese');
 
-        // Show or hide text based on current language
         if (currentLanguage === 'english') {
-            englishQuestion.style.display = 'block'; // Show English question
-            chineseQuestion.style.display = 'none';   // Hide Chinese question
-            englishAnswer.style.display = 'block';    // Show English answer
-            chineseAnswer.style.display = 'none';      // Hide Chinese answer
+            englishQuestion.style.display = 'block';
+            chineseQuestion.style.display = 'none';
+            englishAnswer.style.display = 'block';
+            chineseAnswer.style.display = 'none';
         } else {
-            englishQuestion.style.display = 'none';   // Hide English question
-            chineseQuestion.style.display = 'block';  // Show Chinese question
-            englishAnswer.style.display = 'none';     // Hide English answer
-            chineseAnswer.style.display = 'block';     // Show Chinese answer
+            englishQuestion.style.display = 'none';
+            chineseQuestion.style.display = 'block';
+            englishAnswer.style.display = 'none';
+            chineseAnswer.style.display = 'block';
         }
     });
 }
+
+// Function to update download link and button text
+function updateDownloadLinkAndButton() {
+    const downloadButton = document.getElementById('downloadButton');
+    const downloadLink = document.getElementById('downloadLink');
+
+    if (currentLanguage === 'english') {
+        downloadLink.href = './assets/eng-FAQ.pdf';
+        downloadLink.download = 'eng-FAQ.pdf';
+        downloadButton.innerText = 'Download FAQ';
+    } else {
+        downloadLink.href = './assets/chi-FAQ.pdf';
+        downloadLink.download = 'chi-FAQ.pdf';
+        downloadButton.innerText = '下载 FAQ'; // Chinese text for "Download FAQ"
+    }
+}
+
+
 
 // FAQ question answer toggle function
 function toggleAnswer(clickedQuestion) {

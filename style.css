@@ -501,7 +501,7 @@ section {
     gap: 5px;
 }
 
-#languageToggle , #download{
+#languageToggle , #downloadButton{
     background-color: #719cd4;
     color: white; /* White text */
     border: none; /* Remove borders */
