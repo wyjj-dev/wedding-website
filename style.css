@@ -149,7 +149,7 @@ section {
 
 .header-text{
     font-family: 'sarlotte';
-    font-size: 8px;
+    font-size: min(1.1vw, 1.1vh);
     letter-spacing: 0.05em;
     color: #3d6ca8;
 }

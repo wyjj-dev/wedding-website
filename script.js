@@ -337,7 +337,24 @@ function scrollToCurrentSection() {
 }
 
 // Listen for orientation change
+let isOrientationChanging = false;
+
 window.addEventListener("orientationchange", function() {
+    isOrientationChanging = true; // Set the flag
+    
+    // Clear any previous resize timeout
+    clearTimeout(resizeTimeout);
+    
+    // Use a timeout to allow the layout to adjust
+    resizeTimeout = setTimeout(() => {
+        isOrientationChanging = false; // Reset the flag
+        scrollToCurrentSection(); // Scroll to the current section
+    }, 400); // Adjust the delay as necessary
+});
+
+window.addEventListener("resize", function() {
+    if (isOrientationChanging) return; // Prevent scrolling during orientation change
+
     // Clear any previous resize timeout
     clearTimeout(resizeTimeout);
     
@@ -347,15 +364,10 @@ window.addEventListener("orientationchange", function() {
     }, 200); // Adjust the delay as necessary
 });
 
-// Handle resize event similarly
-window.addEventListener("resize", function() {
-    // Clear any previous resize timeout
-    clearTimeout(resizeTimeout);
-    
-    // Use a timeout to allow the layout to adjust
-    resizeTimeout = setTimeout(() => {
-        scrollToCurrentSection(); // Scroll to the current section
-    }, 200); // Adjust the delay as necessary
-});
+function scrollToCurrentSection() {
+    // Your logic to scroll to the current section
+    // Make sure it correctly calculates the section based on current layout
+}
+
 
 
