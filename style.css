@@ -449,7 +449,21 @@ section {
 .faq-link {
     text-decoration: none;
     border-bottom: 1px dotted #7439a8;
+    color: #7439a8; /* Default color */
 }
+
+.faq-link:visited {
+    color: #7439a8; /* Color after link is visited */
+}
+
+.faq-link:hover {
+    color: #7439a8; /* Color on hover */
+}
+
+.faq-link:active {
+    color: #7439a8; /* Color when link is clicked */
+}
+
 
 /* Answer containers start hidden */
 .answer-container {
@@ -519,9 +533,4 @@ section {
 .button-bottom a{
     text-decoration: none;
 }
-
-.short-height{
-    line-height: 0.5;
-}
-
 
