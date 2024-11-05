@@ -438,10 +438,12 @@ section {
 }
 
 .faq-bottom-container {
+    flex-grow: 1;
     font-family: 'leelawadee';
     color: #3d6ca8;
     font-size: min(2vw, 2vh);
     width: 100%;
+    overflow: hidden;
 }
 
 .faq-link {
