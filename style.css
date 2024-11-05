@@ -535,7 +535,7 @@ section {
 }
 
 .link-icon{
-    height: min(2vw, 2vh);
+    height: min(1.2vw, 1.2vh);
     width: auto;
 }
 

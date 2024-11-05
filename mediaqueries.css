@@ -158,6 +158,10 @@
         height: min(5vw, 5vh);
         width: min(22vw, 22vh);
     }
+
+    .link-icon{
+        height: min(2vw, 2vh);
+    }
 }
 
 
