@@ -336,25 +336,6 @@ function scrollToCurrentSection() {
     }
 }
 
-// Listen for orientation change
-// Function to scroll to the current section
-function scrollToCurrentSection() {
-    const sections = document.querySelectorAll('section'); // Adjust selector based on your structure
-    let currentSection = null;
-
-    // Determine the current section based on scroll position
-    sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-            currentSection = section;
-        }
-    });
-
-    // Scroll to the current section if found
-    if (currentSection) {
-        currentSection.scrollIntoView({ behavior: 'smooth' });
-    }
-}
 
 // Listen for orientation change
 window.addEventListener("orientationchange", function() {
@@ -376,14 +357,6 @@ window.addEventListener("resize", function() {
     resizeTimeout = setTimeout(() => {
         scrollToCurrentSection(); // Scroll to the current section
     }, 200); // Adjust the delay as necessary
-});
-
-// Optional: Handle scroll event for smoother behavior
-window.addEventListener("scroll", function() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        scrollToCurrentSection();
-    }, 200);
 });
 
 
