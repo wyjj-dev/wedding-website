@@ -447,7 +447,6 @@ section {
 }
 
 .faq-link {
-    color: #3d6ca8;       /* Match your text color */
     text-decoration: none;
     border-bottom: 1px dotted #3d6ca8;
 }
@@ -519,6 +518,10 @@ section {
 
 .button-bottom a{
     text-decoration: none;
+}
+
+.short-height{
+    line-height: 0.5;
 }
 
 

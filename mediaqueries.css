@@ -142,13 +142,13 @@
     }
 
     .button-bottom {
-        padding-bottom: min(25vw, 25vh); /* Optional: adds some spacing from the bottom */
+        padding-bottom: min(27vw, 27vh); /* Optional: adds some spacing from the bottom */
     }
 
     #languageToggle , #downloadButton{
-        font-size: min(2vw, 2vh);
+        font-size: min(3vw, 3vh);
         height: min(5vw, 5vh);
-        width: min(15vw, 15vh);
+        width: min(22vw, 22vh);
     }
 }
 
