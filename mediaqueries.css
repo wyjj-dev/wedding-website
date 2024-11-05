@@ -26,6 +26,14 @@
         justify-content: center;
     }
 
+    #loading-screen img {
+        height: 35px;
+    }
+    
+    .loading-text{
+        font-size: 15px;
+    }
+
     /* Side Bar */
     .dot {
         width: 5px; /* Dot size for mobile */

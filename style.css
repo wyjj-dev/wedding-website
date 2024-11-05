@@ -92,14 +92,14 @@ section {
 
 #loading-screen img {
     width: auto;
-    height: 30px;
+    height: 50px;
     max-width: 100%;
     object-fit: contain;
 }
 
 .loading-text{
     font-family: 'sarlotte';
-    font-size: 10px;
+    font-size: 20px;
     letter-spacing: 0.05em;
     color: #3d6ca8;
 }
@@ -532,5 +532,10 @@ section {
 
 .button-bottom a{
     text-decoration: none;
+}
+
+.link-icon{
+    height: min(2vw, 2vh);
+    width: auto;
 }
 

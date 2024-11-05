@@ -298,12 +298,12 @@ function updateDownloadLinkAndButton() {
     const downloadLink = document.getElementById('downloadLink');
 
     if (currentLanguage === 'english') {
-        downloadLink.href = './assets/eng-FAQ.pdf';
-        downloadLink.download = 'eng-FAQ.pdf';
+        downloadLink.href = './assets/FAQ_EN.pdf';
+        downloadLink.download = 'English FAQ.pdf';
         downloadButton.innerText = 'Download FAQ';
     } else {
-        downloadLink.href = './assets/chi-FAQ.pdf';
-        downloadLink.download = 'chi-FAQ.pdf';
+        downloadLink.href = './assets/FAQ_CN.pdf';
+        downloadLink.download = 'Chinese FAQ.pdf';
         downloadButton.innerText = '下载 FAQ'; // Chinese text for "Download FAQ"
     }
 }
