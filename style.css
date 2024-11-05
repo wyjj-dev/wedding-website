@@ -271,6 +271,7 @@ section {
     font-size: min(2vw, 2vh);
     font-family: 'sarlotte';
     color: #3d6ca8;
+    word-spacing: 0.15em;
 }
 
 .mobile-center{
@@ -396,7 +397,8 @@ section {
 }
 
 .rsvp-container img{
-    width: 80%;
+    width: min(25vw, 25vh);
+    height: auto;
 }
 
 
@@ -494,9 +496,10 @@ section {
     justify-content: center;
     margin-top: auto; /* Pushes the button to the bottom */
     padding-bottom: min(15vw, 15vh); /* Optional: adds some spacing from the bottom */
+    gap: 5px;
 }
 
-#languageToggle {
+#languageToggle , #download{
     background-color: #719cd4;
     color: white; /* White text */
     border: none; /* Remove borders */
@@ -506,9 +509,14 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: min(2vw, 2vh);
-    height: min(5vw, 5vh);
+    font-size: min(1.5vw, 1.5vh);
+    height: min(2.5vw, 2.5vh);
     width: min(15vw, 15vh);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+.button-bottom a{
+    text-decoration: none;
+}
+
 

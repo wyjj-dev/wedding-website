@@ -1,78 +1,101 @@
-document.addEventListener('touchstart', function (event) {
+const DOUBLE_TAP_DELAY = 300; // Delay for double-tap zoom prevention
+const SCROLL_DELAY = 10; // Delay for scroll to top
+
+let lastTouchEnd = 0;
+
+// Function to prevent zoom on touch events
+function handleTouchStart(event) {
     if (event.touches.length > 1) {
         event.preventDefault(); // Prevents pinch-to-zoom
     }
-}, { passive: false });
+}
 
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
+// Function to prevent double-tap zoom
+function handleTouchEnd(event) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= DOUBLE_TAP_DELAY) {
         event.preventDefault(); // Prevents double-tap zoom
     }
     lastTouchEnd = now;
-}, { passive: false });
+}
 
-
-
-// Scroll to Top on Page Load or Refresh with Delay for iOS Compatibility
-window.addEventListener("load", function() {
-    setTimeout(function() {
+// Function to scroll to the top of the page
+function scrollToTop() {
+    setTimeout(() => {
         window.scrollTo(0, 0);
-    }, 10); // Delay by 10ms to ensure readiness
-});
+    }, SCROLL_DELAY);
+}
+
+// Event listeners
+document.addEventListener('touchstart', handleTouchStart, { passive: false });
+document.addEventListener('touchend', handleTouchEnd, { passive: false });
+window.addEventListener("load", scrollToTop);
 
 
 
+
+
+// Loading Screen and Side Bar
 // Loading Screen Logic
-document.addEventListener("DOMContentLoaded", function() {
-    const loadingScreen = document.getElementById('loading-screen');
-    const sidebar = document.querySelector('.sidebar');
+const FADE_OUT_DELAY = 4000; // Delay before starting fade-out
+const HIDE_DELAY = 2000; // Duration for fade-out to complete
+const LOADING_SCREEN_ID = 'loading-screen'; // ID for loading screen
+const SIDEBAR_CLASS = 'sidebar'; // Class for sidebar
+const SIDEBAR_HIDDEN_CLASS = 'sidebar-hidden'; // Class to hide sidebar
 
-    // Add the visible class to start the fade-in effect
+function showLoadingScreen(loadingScreen, sidebar) {
     loadingScreen.classList.add('visible');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    sidebar.classList.add(SIDEBAR_HIDDEN_CLASS); // Hide the sidebar
+}
 
-    // Prevent scrolling while the loading screen is visible
-    document.body.style.overflow = 'hidden';
+function hideLoadingScreen(loadingScreen) {
+    loadingScreen.classList.add('hidden'); // Start fade-out
+    setTimeout(() => {
+        loadingScreen.style.display = 'none'; // Remove loading screen
+        document.body.style.overflow = ''; // Re-enable scrolling
+    }, HIDE_DELAY); // Match with the CSS transition duration
+}
 
-    // Initially hide the sidebar to ensure it does not show during loading
-    sidebar.classList.add('sidebar-hidden');
-    
+document.addEventListener("DOMContentLoaded", function() {
+    const loadingScreen = document.getElementById(LOADING_SCREEN_ID);
+    const sidebar = document.querySelector(`.${SIDEBAR_CLASS}`);
+
+    showLoadingScreen(loadingScreen, sidebar); // Show loading screen
+
     // Wait for all resources to load
     window.onload = function() {
-        // Start fade-out process after a delay
         setTimeout(() => {
-            // Add the hidden class to start fade-out
-            loadingScreen.classList.add('hidden');
-            
-            // After fade-out, remove loading screen, re-enable scrolling, and show sidebar
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                document.body.style.overflow = ''; // Re-enable scrolling
-
-                // Show sidebar for 5 seconds
-                showSidebarForDuration(5000); // Show sidebar for 5 seconds
-                updateActiveSection(); // Immediately update active section after loading screen disappears
-            }, 2000); // Match this with the CSS transition duration
-        }, 4000); // Optional delay before starting fade-out
+            hideLoadingScreen(loadingScreen); // Hide loading screen after delay
+            updateActiveSection(); // Update active section
+        }, FADE_OUT_DELAY); // Delay before starting fade-out
     };
 });
 
 
+// Sidebar function and update the active section
+const DOT_CLASS = '.dot';
 
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
-
-
-// Function to show the sidebar and update the active section
 function showSidebar() {
-    const sidebar = document.querySelector('.sidebar');
+    const sidebar = document.querySelector(`.${SIDEBAR_CLASS}`);
     
-    sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
+    sidebar.classList.remove(SIDEBAR_HIDDEN_CLASS); // Ensure it's not hidden
     sidebar.style.opacity = '1'; // Make sidebar visible
     updateActiveSection(); // Update active dot whenever sidebar appears
 }
 
-// Function to detect the current section in view
 function updateActiveSection() {
     const sections = document.querySelectorAll('section');
     let currentSection = '';
@@ -82,13 +105,14 @@ function updateActiveSection() {
         const sectionHeight = section.offsetHeight;
 
         // Check if section is in viewport
-        if (window.scrollY >= sectionTop - sectionHeight / 3) {
+        if (window.scrollY >= sectionTop - sectionHeight / 3 && 
+            window.scrollY < sectionTop + sectionHeight) {
             currentSection = section.getAttribute('id');
         }
     });
 
     // Update active dot based on current section
-    document.querySelectorAll('.dot').forEach(dot => {
+    document.querySelectorAll(DOT_CLASS).forEach(dot => {
         dot.classList.remove('active'); // Remove 'active' class from all dots
         if (dot.getAttribute('href').substring(1) === currentSection) {
             dot.classList.add('active'); // Add 'active' class to the current dot
@@ -97,19 +121,20 @@ function updateActiveSection() {
 }
 
 // Event listener for scrolling
-document.addEventListener('scroll', function() {
-    const sidebar = document.querySelector('.sidebar');
+document.addEventListener('scroll', debounce(function() {
+    const sidebar = document.querySelector(`.${SIDEBAR_CLASS}`);
 
     // Show the sidebar when scrolling
-    sidebar.classList.remove('sidebar-hidden'); // Ensure it's not hidden
+    sidebar.classList.remove(SIDEBAR_HIDDEN_CLASS); // Ensure it's not hidden
     sidebar.style.opacity = '1'; // Make sidebar visible
 
     // Update active section as user scrolls
     updateActiveSection();
-});
+}, 100)); // Debounce time in milliseconds
 
 // Ensure the sidebar is visible on load
 window.addEventListener("load", showSidebar);
+
 
 
 
@@ -287,5 +312,50 @@ function toggleAnswer(clickedQuestion) {
         answer.style.display = "block";
     }
 }
+
+
+let resizeTimeout;
+
+// Function to find the nearest section to scroll to
+function scrollToCurrentSection() {
+    const sections = document.querySelectorAll('section');
+    let currentSection = null;
+
+    // Find the section currently in view
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+
+        if (sectionTop >= 0 && sectionTop < window.innerHeight) {
+            currentSection = section;
+        }
+    });
+
+    // Scroll to the top of the current section
+    if (currentSection) {
+        currentSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Listen for orientation change
+window.addEventListener("orientationchange", function() {
+    // Clear any previous resize timeout
+    clearTimeout(resizeTimeout);
+    
+    // Use a timeout to allow the layout to adjust
+    resizeTimeout = setTimeout(() => {
+        scrollToCurrentSection(); // Scroll to the current section
+    }, 200); // Adjust the delay as necessary
+});
+
+// Handle resize event similarly
+window.addEventListener("resize", function() {
+    // Clear any previous resize timeout
+    clearTimeout(resizeTimeout);
+    
+    // Use a timeout to allow the layout to adjust
+    resizeTimeout = setTimeout(() => {
+        scrollToCurrentSection(); // Scroll to the current section
+    }, 200); // Adjust the delay as necessary
+});
 
 

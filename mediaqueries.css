@@ -119,6 +119,7 @@
 
     .rsvp-container img {
         padding-left: min(8vw, 8vh);
+        width: min(38vw, 38vh);
     }
 
     /* FAQ Page */
@@ -142,6 +143,12 @@
 
     .button-bottom {
         padding-bottom: min(20vw, 20vh); /* Optional: adds some spacing from the bottom */
+    }
+
+    #languageToggle , #download{
+        font-size: min(2vw, 2vh);
+        height: min(5vw, 5vh);
+        width: min(15vw, 15vh);
     }
 }
 
