@@ -266,6 +266,10 @@ function toggleAnswer(clickedQuestion) {
     }
 }
 
+document.querySelectorAll('.question-container').forEach(q => {
+    q.addEventListener('click', () => toggleAnswer(q));
+});
+
 
 // Resize / orientation
 let resizeTimeout;
