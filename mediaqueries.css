@@ -129,6 +129,12 @@
         width: min(30vw, 30vh);
     }
 
+    .rsvp-popup {
+        width: 70%;
+        padding: 24px;
+        font-size: 14px;
+    }
+
     /* FAQ */
     .faq-bottom-container {
         font-size: min(3vw, 3vh);
