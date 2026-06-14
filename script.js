@@ -1,79 +1,57 @@
-const DOUBLE_TAP_DELAY = 300; // Delay for double-tap zoom prevention
-const SCROLL_DELAY = 10; // Delay for scroll to top
+const SCROLL_DELAY = 10;
 
-let lastTouchEnd = 0;
-
-// Function to prevent zoom on touch events
 function handleTouchStart(event) {
     if (event.touches.length > 1) {
-        event.preventDefault(); // Prevents pinch-to-zoom
+        event.preventDefault();
     }
 }
 
-// Function to prevent double-tap zoom
-function handleTouchEnd(event) {
-    const now = Date.now();
-    if (now - lastTouchEnd <= DOUBLE_TAP_DELAY) {
-        event.preventDefault(); // Prevents double-tap zoom
-    }
-    lastTouchEnd = now;
-}
-
-// Function to scroll to the top of the page
 function scrollToTop() {
     setTimeout(() => {
         window.scrollTo(0, 0);
     }, SCROLL_DELAY);
 }
 
-// Event listeners
 document.addEventListener('touchstart', handleTouchStart, { passive: false });
-document.addEventListener('touchend', handleTouchEnd, { passive: false });
 window.addEventListener("load", scrollToTop);
 
 
-
-
-
-// Loading Screen and Side Bar
-// Loading Screen Logic
-const FADE_OUT_DELAY = 4000; // Delay before starting fade-out
-const HIDE_DELAY = 2000; // Duration for fade-out to complete
-const LOADING_SCREEN_ID = 'loading-screen'; // ID for loading screen
-const SIDEBAR_CLASS = 'sidebar'; // Class for sidebar
-const SIDEBAR_HIDDEN_CLASS = 'sidebar-hidden'; // Class to hide sidebar
+// Loading Screen
+const FADE_OUT_DELAY = 4000;
+const HIDE_DELAY = 2000;
+const SIDEBAR_CLASS = 'sidebar';
+const SIDEBAR_HIDDEN_CLASS = 'sidebar-hidden';
 
 function showLoadingScreen(loadingScreen, sidebar) {
     loadingScreen.classList.add('visible');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-    sidebar.classList.add(SIDEBAR_HIDDEN_CLASS); // Hide the sidebar
+    document.body.style.overflow = 'hidden';
+    sidebar.classList.add(SIDEBAR_HIDDEN_CLASS);
 }
 
 function hideLoadingScreen(loadingScreen) {
-    loadingScreen.classList.add('hidden'); // Start fade-out
+    loadingScreen.classList.add('hidden');
     setTimeout(() => {
-        loadingScreen.style.display = 'none'; // Remove loading screen
-        document.body.style.overflow = ''; // Re-enable scrolling
-    }, HIDE_DELAY); // Match with the CSS transition duration
+        loadingScreen.style.display = 'none';
+        document.body.style.overflow = '';
+    }, HIDE_DELAY);
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    const loadingScreen = document.getElementById(LOADING_SCREEN_ID);
+document.addEventListener("DOMContentLoaded", function () {
+    const loadingScreen = document.getElementById('loading-screen');
     const sidebar = document.querySelector(`.${SIDEBAR_CLASS}`);
 
-    showLoadingScreen(loadingScreen, sidebar); // Show loading screen
+    showLoadingScreen(loadingScreen, sidebar);
 
-    // Wait for all resources to load
-    window.onload = function() {
+    window.onload = function () {
         setTimeout(() => {
-            hideLoadingScreen(loadingScreen); // Hide loading screen after delay
-            updateActiveSection(); // Update active section
-        }, FADE_OUT_DELAY); // Delay before starting fade-out
+            hideLoadingScreen(loadingScreen);
+            updateActiveSection();
+        }, FADE_OUT_DELAY);
     };
 });
 
 
-// Sidebar function and update the active section
+// Sidebar
 const DOT_CLASS = '.dot';
 
 function debounce(func, wait) {
@@ -90,185 +68,150 @@ function debounce(func, wait) {
 
 function showSidebar() {
     const sidebar = document.querySelector(`.${SIDEBAR_CLASS}`);
-    
-    sidebar.classList.remove(SIDEBAR_HIDDEN_CLASS); // Ensure it's not hidden
-    sidebar.style.opacity = '1'; // Make sidebar visible
-    updateActiveSection(); // Update active dot whenever sidebar appears
+    sidebar.classList.remove(SIDEBAR_HIDDEN_CLASS);
+    sidebar.style.opacity = '1';
+    updateActiveSection();
 }
 
 function updateActiveSection() {
     const sections = document.querySelectorAll('section');
-    let currentSection = '';
+    let activeSectionId = '';
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
 
-        // Check if section is in viewport
-        if (window.scrollY >= sectionTop - sectionHeight / 3 && 
+        if (window.scrollY >= sectionTop - sectionHeight / 3 &&
             window.scrollY < sectionTop + sectionHeight) {
-            currentSection = section.getAttribute('id');
+            activeSectionId = section.getAttribute('id');
         }
     });
 
-    // Update active dot based on current section
     document.querySelectorAll(DOT_CLASS).forEach(dot => {
-        dot.classList.remove('active'); // Remove 'active' class from all dots
-        if (dot.getAttribute('href').substring(1) === currentSection) {
-            dot.classList.add('active'); // Add 'active' class to the current dot
+        dot.classList.remove('active');
+        if (dot.getAttribute('href').substring(1) === activeSectionId) {
+            dot.classList.add('active');
         }
     });
 }
 
-// Event listener for scrolling
-document.addEventListener('scroll', debounce(function() {
+document.addEventListener('scroll', debounce(function () {
     const sidebar = document.querySelector(`.${SIDEBAR_CLASS}`);
-
-    // Show the sidebar when scrolling
-    sidebar.classList.remove(SIDEBAR_HIDDEN_CLASS); // Ensure it's not hidden
-    sidebar.style.opacity = '1'; // Make sidebar visible
-
-    // Update active section as user scrolls
+    sidebar.classList.remove(SIDEBAR_HIDDEN_CLASS);
+    sidebar.style.opacity = '1';
     updateActiveSection();
-}, 100)); // Debounce time in milliseconds
+}, 100));
 
-// Ensure the sidebar is visible on load
 window.addEventListener("load", showSidebar);
 
+document.querySelectorAll('.dot').forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        currentSection = index;
+    });
+});
 
 
-
-
-
-
-
-
-// fade in page
+// Fade in pages
 document.addEventListener("DOMContentLoaded", function () {
     const sections = [document.querySelector('#intro'), document.querySelector('#info'), document.querySelector('#faq')];
 
     function isInView(element) {
         const sectionPosition = element.getBoundingClientRect();
-        return sectionPosition.top < window.innerHeight && sectionPosition.bottom > 0; // Check if the section is in the viewport
+        return sectionPosition.top < window.innerHeight && sectionPosition.bottom > 0;
     }
 
     function checkVisibility() {
         sections.forEach(section => {
             if (isInView(section)) {
-                section.classList.add('visible'); // Add visible class when in view
+                section.classList.add('visible');
             } else {
-                section.classList.remove('visible'); // Remove visible class when out of view
+                section.classList.remove('visible');
             }
         });
     }
 
-    // Initial visibility check
-    checkVisibility(); // Ensure the first page is visible on load
-
+    checkVisibility();
     window.addEventListener('scroll', checkVisibility, { passive: false });
 });
 
 
-
-
 // Scroll effect
-
 const sections = document.querySelectorAll('section');
 let currentSection = 0;
-const MIN_SWIPE_DISTANCE = 100; // Minimum swipe distance in pixels to trigger scrolling
-const SCROLL_TIMEOUT = 1500; // Timeout duration to limit scroll events
-let isScrolling = false; // Flag to prevent multiple scrolls
+const MIN_SWIPE_DISTANCE = 100;
+const SCROLL_TIMEOUT = 1500;
+let isScrolling = false;
 
 function scrollToSection(index) {
-    if (index < 0 || index >= sections.length) return; // Prevent out-of-bounds scrolling
+    if (index < 0 || index >= sections.length) return;
     sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    currentSection = index; // Update the current section index
+    currentSection = index;
 }
 
 function handleScroll(event) {
-    event.preventDefault(); // Prevent default scrolling behavior
-
-    // Prevent multiple scroll actions if already scrolling
+    event.preventDefault();
     if (isScrolling) return;
+    isScrolling = true;
 
-    isScrolling = true; // Set scrolling flag
-
-    // Scroll to the next section based on scroll direction
     if (event.deltaY > 0) {
-        scrollToSection(currentSection + 1); // Scroll down
+        scrollToSection(currentSection + 1);
     } else {
-        scrollToSection(currentSection - 1); // Scroll up
+        scrollToSection(currentSection - 1);
     }
 
-    // Reset isScrolling after a timeout
     setTimeout(() => {
-        isScrolling = false; // Allow scrolling again after the timeout
+        isScrolling = false;
     }, SCROLL_TIMEOUT);
 }
 
-// Attach the handleScroll function to the mouse wheel event
-window.addEventListener('wheel', handleScroll, { passive: false });
+if (!('ontouchstart' in window)) {
+    window.addEventListener('wheel', handleScroll, { passive: false });
+}
 
-// Touch events for mobile
 let touchStartY = 0;
 let touchEndY = 0;
 
 window.addEventListener('touchstart', (event) => {
-    touchStartY = event.touches[0].clientY; // Capture the starting touch position
+    touchStartY = event.touches[0].clientY;
 });
 
 window.addEventListener('touchend', (event) => {
-    touchEndY = event.changedTouches[0].clientY; // Capture the ending touch position
-    const deltaY = touchEndY - touchStartY; // Calculate the swipe distance
+    touchEndY = event.changedTouches[0].clientY;
+    const deltaY = touchEndY - touchStartY;
 
-    // Only trigger scrolling if the swipe distance exceeds the minimum
     if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE) {
-        // Determine the swipe direction and scroll accordingly
         if (deltaY < 0) {
-            scrollToSection(currentSection + 1); // Swiping up
+            scrollToSection(currentSection + 1);
         } else if (deltaY > 0) {
-            scrollToSection(currentSection - 1); // Swiping down
+            scrollToSection(currentSection - 1);
         }
     }
 });
 
-// Optional: Prevent default behavior for touch events to avoid scrolling in the browser
 window.addEventListener('touchmove', (event) => {
     event.preventDefault();
 }, { passive: false });
 
 
-
-//Translate
-// Toggle Language for FAQ
+// Language toggle
 let currentLanguage = 'english';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const languageToggleButton = document.getElementById('languageToggle');
-    const downloadButton = document.getElementById('downloadButton');
     const downloadLink = document.getElementById('downloadLink');
 
-    // Set initial button text for language toggle
     languageToggleButton.innerText = 'EN/中文';
 
-    // Add event listener to the language toggle button
     languageToggleButton.addEventListener('click', () => {
-        // Toggle the current language
         currentLanguage = currentLanguage === 'english' ? 'chinese' : 'english';
-
-        // Update the download link and button text
         updateDownloadLinkAndButton();
-
-        // Toggle FAQ text visibility
         toggleLanguage();
     });
 
-    // Initial function calls to set the correct language and download link
     updateDownloadLinkAndButton();
     toggleLanguage();
 });
 
-// Function to toggle FAQ text visibility
 function toggleLanguage() {
     const questions = document.querySelectorAll('.Q-A');
 
@@ -292,7 +235,6 @@ function toggleLanguage() {
     });
 }
 
-// Function to update download link and button text
 function updateDownloadLinkAndButton() {
     const downloadButton = document.getElementById('downloadButton');
     const downloadLink = document.getElementById('downloadLink');
@@ -304,79 +246,56 @@ function updateDownloadLinkAndButton() {
     } else {
         downloadLink.href = './assets/FAQ_CN.pdf';
         downloadLink.download = 'Chinese FAQ.pdf';
-        downloadButton.innerText = '下载 FAQ'; // Chinese text for "Download FAQ"
+        downloadButton.innerText = '下载 FAQ';
     }
 }
 
 
-
-// FAQ question answer toggle function
+// FAQ toggle
 function toggleAnswer(clickedQuestion) {
-    // Select all answer containers
     const allAnswers = document.querySelectorAll('.answer-container');
-    
-    // Toggle only the clicked question's answer
     const answer = clickedQuestion.nextElementSibling;
-    
-    // Check if the clicked answer is already open
     const isAnswerOpen = answer.style.display === "block";
 
-    // Close all answers first
     allAnswers.forEach(answer => {
         answer.style.display = "none";
     });
 
-    // Open the clicked answer only if it was not open before
     if (!isAnswerOpen) {
         answer.style.display = "block";
     }
 }
 
 
+// Resize / orientation
 let resizeTimeout;
 
-// Function to find the nearest section to scroll to
 function scrollToCurrentSection() {
     const sections = document.querySelectorAll('section');
-    let currentSection = null;
+    let visibleSection = null;
 
-    // Find the section currently in view
     sections.forEach(section => {
         const sectionTop = section.getBoundingClientRect().top;
-
         if (sectionTop >= 0 && sectionTop < window.innerHeight) {
-            currentSection = section;
+            visibleSection = section;
         }
     });
 
-    // Scroll to the top of the current section
-    if (currentSection) {
-        currentSection.scrollIntoView({ behavior: 'smooth' });
+    if (visibleSection) {
+        visibleSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
-
-// Listen for orientation change
-window.addEventListener("orientationchange", function() {
-    // Clear any previous resize timeout
+window.addEventListener("orientationchange", function () {
     clearTimeout(resizeTimeout);
-    
-    // Use a timeout to allow the layout to adjust
     resizeTimeout = setTimeout(() => {
-        scrollToCurrentSection(); // Scroll to the current section
-    }, 200); // Adjust the delay as necessary
+        scrollToCurrentSection();
+    }, 200);
 });
 
-// Handle resize event similarly
-window.addEventListener("resize", function() {
-    // Clear any previous resize timeout
+window.addEventListener("resize", function () {
     clearTimeout(resizeTimeout);
-    
-    // Use a timeout to allow the layout to adjust
     resizeTimeout = setTimeout(() => {
-        scrollToCurrentSection(); // Scroll to the current section
-    }, 200); // Adjust the delay as necessary
+        scrollToCurrentSection();
+    }, 200);
 });
-
-
-
