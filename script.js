@@ -25,6 +25,7 @@ const SIDEBAR_HIDDEN_CLASS = 'sidebar-hidden';
 function showLoadingScreen(loadingScreen, sidebar) {
     loadingScreen.classList.add('visible');
     document.body.style.overflow = 'hidden';
+    isScrolling = true;
     sidebar.classList.add(SIDEBAR_HIDDEN_CLASS);
 }
 
@@ -33,6 +34,7 @@ function hideLoadingScreen(loadingScreen) {
     setTimeout(() => {
         loadingScreen.style.display = 'none';
         document.body.style.overflow = '';
+        isScrolling = false;
     }, HIDE_DELAY);
 }
 
@@ -141,6 +143,7 @@ let currentSection = 0;
 const MIN_SWIPE_DISTANCE = 100;
 const SCROLL_TIMEOUT = 1500;
 let isScrolling = false;
+let popupOpen = false;
 
 function scrollToSection(index) {
     if (index < 0 || index >= sections.length) return;
@@ -150,7 +153,7 @@ function scrollToSection(index) {
 
 function handleScroll(event) {
     event.preventDefault();
-    if (isScrolling) return;
+    if (isScrolling || popupOpen) return;
     isScrolling = true;
 
     if (event.deltaY > 0) {
@@ -179,7 +182,7 @@ window.addEventListener('touchend', (event) => {
     touchEndY = event.changedTouches[0].clientY;
     const deltaY = touchEndY - touchStartY;
 
-    if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE) {
+    if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE && !popupOpen) {
         if (deltaY < 0) {
             scrollToSection(currentSection + 1);
         } else if (deltaY > 0) {
@@ -307,10 +310,10 @@ window.addEventListener("resize", function () {
 function showRSVPPopup(event) {
     event.preventDefault();
     document.getElementById('rsvpPopup').classList.add('active');
-    isScrolling = true;
+    popupOpen = true;
 }
 
 function closeRSVPPopup() {
     document.getElementById('rsvpPopup').classList.remove('active');
-    isScrolling = false;
+    popupOpen = false;
 }
