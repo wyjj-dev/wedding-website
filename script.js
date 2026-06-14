@@ -303,3 +303,14 @@ window.addEventListener("resize", function () {
         scrollToCurrentSection();
     }, 200);
 });
+
+function showRSVPPopup(event) {
+    event.preventDefault();
+    document.getElementById('rsvpPopup').classList.add('active');
+    isScrolling = true;
+}
+
+function closeRSVPPopup() {
+    document.getElementById('rsvpPopup').classList.remove('active');
+    isScrolling = false;
+}

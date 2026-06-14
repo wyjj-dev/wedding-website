@@ -106,8 +106,7 @@
                     </div>
                 </div>
                 <div class="rsvp-container">
-                    <a href="https://withjoy.com/jiahao-and-valerie/rsvp" target="_blank" aria-label="RSVP"
-                        rel="noopener noreferrer">
+                    <a href="#" aria-label="RSVP" onclick="showRSVPPopup(event)">
                         <img src="./assets/XI.png" alt="xi img">
                     </a>
                 </div>
@@ -285,8 +284,7 @@
                         <div class="answer-container">
                             <div class="english">
                                 Click Here:
-                                <a class="faq-link" href="https://withjoy.com/jiahao-and-valerie/rsvp" target="_blank"
-                                    rel="noopener noreferrer">Link to RSVP
+                                <a class="faq-link" href="#" onclick="showRSVPPopup(event)">Link to RSVP
                                     <img class="link-icon" src="./assets/LINK-ICON.png" alt="link img">
                                 </a>
                                 <br>
@@ -299,8 +297,7 @@
                             </div>
                             <div class="chinese" style="display: none;">
                                 点击此处：
-                                <a class="faq-link" href="https://withjoy.com/jiahao-and-valerie/rsvp" target="_blank"
-                                    rel="noopener noreferrer">链接以回复参加
+                                <a class="faq-link" href="#" onclick="showRSVPPopup(event)">链接以回复参加
                                     <img class="link-icon" src="./assets/LINK-ICON.png" alt="link img">
                                 </a>
                                 <br>
@@ -347,6 +344,16 @@
             </div>
         </div>
     </section>
+
+    <div class="rsvp-popup-overlay" id="rsvpPopup">
+        <div class="rsvp-popup">
+            Thank you for being part of our journey! We've officially tied the knot and couldn't be more grateful for
+            your love and support. ❤️
+            <br>
+            <button onclick="closeRSVPPopup()">Cheers to Us! 🥂</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
