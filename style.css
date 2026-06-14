@@ -1,11 +1,6 @@
 @font-face {
     font-family: 'leelawadee';
-    src: url('./fonts/leelawadee-ui.ttf') format('truetype'),
-}
-
-@font-face {
-    font-family: 'montcers';
-    src: url('./fonts/Montcers.otf') format('opentype');
+    src: url('./fonts/leelawadee-ui.ttf') format('truetype');
 }
 
 @font-face {
@@ -13,14 +8,8 @@
     src: url('./fonts/Sarlotte.otf') format('opentype');
 }
 
-/* Page CSS */
 
-:root {
-    --effective-vh: 100vh;
-    /* Default value */
-}
-
-
+/* Global */
 * {
     margin: 0;
     padding: 0;
@@ -32,21 +21,17 @@ body {
     overflow: auto;
     height: 300vh;
     scroll-behavior: smooth;
-    /* Enables smooth scrolling */
     scroll-snap-type: y mandatory;
-    /* Ensure snapping behavior */
     overflow-x: hidden;
 }
 
 section {
     height: 100vh;
-    /* Each section takes full viewport height */
     scroll-snap-align: start;
-    /* Aligns to the start of the viewport */
 }
 
 
-/* Sidebar Styling */
+/* Sidebar */
 .sidebar {
     position: fixed;
     top: 50%;
@@ -60,10 +45,8 @@ section {
     transition: opacity 0.5s ease-in-out;
 }
 
-/* Dot Style */
 .dot {
     width: 10px;
-    /* Default dot size for desktop */
     height: 10px;
     background-color: #3d6ba83a;
     border-radius: 50%;
@@ -71,19 +54,14 @@ section {
     transition: background-color 0.3s;
 }
 
-/* Active Dot Style */
 .dot.active {
     background-color: #3d6ba886;
-    /* Highlighted color */
 }
 
 
-
 /* Loading Screen */
-/* Loading Screen CSS */
 #loading-screen {
     position: fixed;
-    /* Cover the whole viewport */
     top: 0;
     left: 0;
     width: 100%;
@@ -94,21 +72,14 @@ section {
     align-items: center;
     justify-content: center;
     opacity: 1;
-    /* Fully visible by default */
     transition: visibility 2s ease-out, opacity 2s ease-out;
-    /* Smooth transition for opacity */
     z-index: 1000;
-    /* Ensure it’s on top of everything else */
 }
 
-
-/* Loading Text and Image */
 .loading-text,
 #loading-screen img {
     opacity: 0;
-    /* Start invisible */
     transition: opacity 2s ease-in;
-    /* Fade-in transition */
 }
 
 #loading-screen img {
@@ -125,42 +96,30 @@ section {
     color: #3d6ca8;
 }
 
-/* Fade-in when loading screen is visible */
 #loading-screen.visible .loading-text,
 #loading-screen.visible img {
     opacity: 1;
-    /* Fully visible */
 }
 
-/* Hidden state for fade-out */
 #loading-screen.hidden {
     opacity: 0;
-    /* Change opacity to 0 to trigger fade-out */
 }
 
 
-/* Intro Page */
-
+/* Intro */
 #intro {
     height: 100vh;
     visibility: hidden;
-    /* Start hidden */
     opacity: 0;
-    /* Start with no opacity */
     transition: opacity 2s ease-in-out;
-    /* Transition for the fade-in effect */
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
-/* When visible */
 #intro.visible {
     visibility: visible;
-    /* Makes it visible in the layout */
     opacity: 1;
-    /* Fully visible */
 }
 
 .top-container {
@@ -228,28 +187,21 @@ section {
 }
 
 
-/* Info Page */
+/* Info */
 #info {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     visibility: hidden;
-    /* or use opacity: 0; */
     opacity: 0;
-    /* Use opacity for fade-in effect */
 }
 
-/* When visible */
 #info.visible {
     visibility: visible;
-    /* or just remove this line if using opacity */
     opacity: 1;
     transition: opacity 2s ease-in-out;
-    /* Transition for the fade-in effect */
 }
-
-/* Location Section */
 
 .STD-loc-rsvp-container {
     height: 100vh;
@@ -266,7 +218,6 @@ section {
     justify-content: center;
 }
 
-
 .STD-text {
     font-family: 'sarlotte';
     font-size: min(5vw, 5vh);
@@ -275,11 +226,8 @@ section {
 
 .STD-pic-container {
     width: 100%;
-    /* Ensure it takes full width */
     max-height: 50vh;
-    /* Limit height */
     overflow: hidden;
-    /* Hide overflow */
     position: relative;
 }
 
@@ -303,9 +251,7 @@ section {
 .date-text,
 .loc-text {
     display: flex;
-    /* Use flexbox for alignment within each section */
     align-items: center;
-    /* Center align items vertically */
     font-size: min(2vw, 2vh);
     font-family: 'sarlotte';
     color: #3d6ca8;
@@ -320,18 +266,15 @@ section {
 .date-text a {
     display: flex;
     align-items: center;
-    /* Center vertically */
     width: auto;
-    /* Ensure it takes the full width available */
     color: #3d6ca8;
-    /* Match your text color */
     white-space: nowrap;
     text-decoration: none;
     border-bottom: 1px dotted #3d6ca8;
 }
 
-/* RSVP Section */
 
+/* Timeline */
 .timeline-rsvp-container {
     height: 40vh;
     width: 100%;
@@ -354,12 +297,12 @@ section {
 }
 
 .dot-text-container {
-    height: 96%;
     display: flex;
     flex-direction: column;
     position: relative;
     width: auto;
     justify-content: center;
+    height: auto;
 }
 
 .timeline-event {
@@ -367,60 +310,7 @@ section {
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    margin-bottom: 5vh;
-    /* Margin scales with screen height */
-}
-
-.event-text {
-    padding-left: calc(0.5vw + 0.5vh);
-    font-family: 'leelawadee';
-    font-size: min(1.3vw, 1.3vh);
-    /* Text size scales with viewport size */
-    color: #3d6ca8;
-    padding-top: 3%;
-}
-
-.red-text {
-    padding-left: calc(0.5vw + 0.5vh);
-    font-family: 'leelawadee';
-    font-size: min(1.3vw, 1.3vh);
-    /* Text size scales with viewport size */
-    color: #d90000;
-}
-
-.big-dot,
-.small-dot {
-    border-radius: 50%;
-    background-color: black;
-    z-index: 1;
-    background-color: #3d6ca8;
-}
-
-.big-dot {
-    width: calc(0.55vw + 0.55vh);
-    /* Dot size scales with viewport */
-    height: calc(0.55vw + 0.55vh);
-}
-
-.small-dot {
-    margin-left: calc(0.12vw + 0.12vh);
-    margin-right: calc(0.3vw + 0.3vh);
-    width: calc(0.3vw + 0.3vh);
-    /* Smaller dot size scaling */
-    height: calc(0.3vw + 0.3vh);
-
-}
-
-.line {
-    position: absolute;
-    width: calc(0.08vw + 0.08vh);
-    /* Same width as big-line */
-    height: 100%;
-    /* Longer line height for middle events */
-    background-color: black;
-    left: calc(0.22vw + 0.22vh);
-    overflow: hidden;
-    background-color: #3d6ca8;
+    margin-bottom: min(3vh, 3vw);
 }
 
 .timeline-event:last-child {
@@ -431,9 +321,51 @@ section {
     font-style: italic;
 }
 
+.event-text {
+    padding-left: calc(0.5vw + 0.5vh);
+    font-family: 'leelawadee';
+    font-size: min(1.3vw, 1.3vh);
+    color: #3d6ca8;
+    padding-top: 3%;
+}
 
+.red-text {
+    padding-left: calc(0.5vw + 0.5vh);
+    font-family: 'leelawadee';
+    font-size: min(1.3vw, 1.3vh);
+    color: #d90000;
+}
 
-/* RSVP Section */
+.big-dot,
+.small-dot {
+    border-radius: 50%;
+    z-index: 1;
+    background-color: #3d6ca8;
+    flex-shrink: 0;
+}
+
+.big-dot {
+    width: 12px;
+    height: 12px;
+}
+
+.small-dot {
+    width: 7px;
+    height: 7px;
+    margin-left: 2px;
+    margin-right: 8px;
+}
+
+.line {
+    position: absolute;
+    width: 2px;
+    background-color: #3d6ca8;
+    left: 5px;
+    top: 8px;
+    bottom: 8px;
+}
+
+/* RSVP */
 .rsvp-container {
     left: 50%;
     width: 50%;
@@ -443,7 +375,6 @@ section {
     display: flex;
     justify-content: center;
     width: 100%;
-
 }
 
 .rsvp-container img {
@@ -452,28 +383,20 @@ section {
 }
 
 
-
-/* FAQ Page */
+/* FAQ */
 #faq {
     height: 100vh;
     visibility: hidden;
-    /* Start hidden */
     opacity: 0;
-    /* Start with no opacity */
     transition: opacity 2s ease-in-out;
-    /* Transition for the fade-in effect */
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
-/* When visible */
 #faq.visible {
     visibility: visible;
-    /* Makes it visible in the layout */
     opacity: 1;
-    /* Fully visible */
 }
 
 .faq-container {
@@ -505,26 +428,14 @@ section {
     text-decoration: none;
     border-bottom: 1px dotted #7439a8;
     color: #7439a8;
-    /* Default color */
 }
 
-.faq-link:visited {
-    color: #7439a8;
-    /* Color after link is visited */
-}
-
-.faq-link:hover {
-    color: #7439a8;
-    /* Color on hover */
-}
-
+.faq-link:visited,
+.faq-link:hover,
 .faq-link:active {
     color: #7439a8;
-    /* Color when link is clicked */
 }
 
-
-/* Answer containers start hidden */
 .answer-container {
     display: none;
     padding-left: min(8vw, 8vh);
@@ -533,7 +444,6 @@ section {
     text-align: justify;
 }
 
-/* Question hover effect for better UX */
 .question-container {
     cursor: pointer;
     margin: 10px 0;
@@ -551,7 +461,6 @@ section {
     padding-right: min(1vw, 1vh);
 }
 
-/* Remove top border from the first question in the FAQ section */
 .question-answer-container>.Q-A:first-child>.question-container {
     padding-top: 0;
     border-top: none;
@@ -561,18 +470,11 @@ section {
     color: #d90000;
 }
 
-.faq-bottom-container {
-    flex-grow: 1;
-    /* Allows the content area to grow and push the button down */
-}
-
 .button-bottom {
     display: flex;
     justify-content: center;
     margin-top: auto;
-    /* Pushes the button to the bottom */
     padding-bottom: min(15vw, 15vh);
-    /* Optional: adds some spacing from the bottom */
     gap: 5px;
 }
 
@@ -580,15 +482,10 @@ section {
 #downloadButton {
     background-color: #719cd4;
     color: white;
-    /* White text */
     border: none;
-    /* Remove borders */
     border-radius: min(3vw, 3vh);
-    /* Rounded corners */
     cursor: pointer;
-    /* Pointer cursor on hover */
     transition: background-color 0.3s;
-    /* Transition for background color */
     display: flex;
     align-items: center;
     justify-content: center;

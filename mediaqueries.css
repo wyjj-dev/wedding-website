@@ -1,8 +1,6 @@
-@media screen and (max-width: 1400px) {}
-
-
-
 @media screen and (max-width: 500px) {
+
+    /* Intro */
     .top-container img {
         height: min(6vh, 6vw);
     }
@@ -24,6 +22,7 @@
         justify-content: center;
     }
 
+    /* Loading Screen */
     #loading-screen img {
         height: 35px;
     }
@@ -32,10 +31,9 @@
         font-size: 15px;
     }
 
-    /* Side Bar */
+    /* Sidebar */
     .dot {
         width: 5px;
-        /* Dot size for mobile */
         height: 5px;
     }
 
@@ -43,19 +41,14 @@
         position: fixed;
         top: 50%;
         right: 10px;
-        /* Adjust as needed to position on the side */
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
         gap: 4px;
-        /* Space between dots */
         z-index: 999;
-        /* Ensure it stays on top */
     }
 
-
-    /* Info page */
-
+    /* Info */
     .STD-container {
         display: flex;
         flex-direction: column;
@@ -91,8 +84,7 @@
         padding-top: 0;
     }
 
-
-    /* RSVP Section */
+    /* Timeline */
     .event-text {
         font-size: min(3vw, 3vh);
     }
@@ -101,23 +93,25 @@
         font-size: min(3vw, 3vh);
     }
 
-    .small-dot {
-        margin-left: calc(0.15vw + 0.15vh);
-        width: calc(0.39vw + 0.39vh);
-        /* Smaller dot size scaling */
-        height: calc(0.39vw + 0.39vh);
+    .big-dot {
+        width: 14px;
+        height: 14px;
     }
 
-    .big-dot {
-        width: calc(0.7vw + 0.7vh);
-        /* Dot size scales with viewport */
-        height: calc(0.7vw + 0.7vh);
+    .small-dot {
+        width: 8px;
+        height: 8px;
+        margin-left: 3px;
+        margin-right: 8px;
     }
 
     .line {
-        left: calc(0.3vw + 0.3vh);
+        left: 6px;
+        top: 7px;
+        bottom: 7px;
     }
 
+    /* RSVP */
     .rsvp-container a {
         justify-content: flex-start;
     }
@@ -135,8 +129,7 @@
         width: min(30vw, 30vh);
     }
 
-    /* FAQ Page */
-
+    /* FAQ */
     .faq-bottom-container {
         font-size: min(3vw, 3vh);
         padding: min(2vw, 2vh);
@@ -150,13 +143,8 @@
         padding-top: min(1vw, 1vh);
     }
 
-    #languageToggle {
-        font-size: min(3vw, 3vh);
-    }
-
     .button-bottom {
         padding-bottom: min(27vw, 27vh);
-        /* Optional: adds some spacing from the bottom */
     }
 
     #languageToggle,
@@ -173,6 +161,8 @@
 
 
 @media screen and (max-width: 350px) {
+
+    /* FAQ small screens */
     .faq-bottom-container {
         font-size: min(2.5vw, 2.5vh);
     }
