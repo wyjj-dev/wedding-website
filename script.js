@@ -168,9 +168,7 @@ function handleScroll(event) {
     }, SCROLL_TIMEOUT);
 }
 
-if (!('ontouchstart' in window)) {
-    window.addEventListener('wheel', handleScroll, { passive: false });
-}
+window.addEventListener('wheel', handleScroll, { passive: false });
 
 let touchStartY = 0;
 let touchEndY = 0;
