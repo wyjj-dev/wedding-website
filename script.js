@@ -170,6 +170,18 @@ function handleScroll(event) {
 
 window.addEventListener('wheel', handleScroll, { passive: false });
 
+document.addEventListener('mousedown', (event) => {
+    if (event.button === 1) {
+        event.preventDefault();
+    }
+});
+
+document.addEventListener('auxclick', (event) => {
+    if (event.button === 1) {
+        event.preventDefault();
+    }
+});
+
 let touchStartY = 0;
 let touchEndY = 0;
 
