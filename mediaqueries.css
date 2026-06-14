@@ -1,27 +1,25 @@
-@media screen and (max-width: 1400px) {
-
-}
+@media screen and (max-width: 1400px) {}
 
 
 
-@media screen and (max-height: 950px) and (max-width: 500px) {
-    .top-container img{
+@media screen and (max-width: 500px) {
+    .top-container img {
         height: min(6vh, 6vw);
     }
 
-    .header-text{
+    .header-text {
         font-size: min(2.3vw, 2.3vh);
     }
 
-    .bottom-container{
+    .bottom-container {
         padding-bottom: 8vh;
     }
 
-    .bottom-container img{
+    .bottom-container img {
         padding: 0;
     }
 
-    .img-main{
+    .img-main {
         display: flex;
         justify-content: center;
     }
@@ -29,32 +27,36 @@
     #loading-screen img {
         height: 35px;
     }
-    
-    .loading-text{
+
+    .loading-text {
         font-size: 15px;
     }
 
     /* Side Bar */
     .dot {
-        width: 5px; /* Dot size for mobile */
+        width: 5px;
+        /* Dot size for mobile */
         height: 5px;
     }
 
     .sidebar {
         position: fixed;
         top: 50%;
-        right: 10px; /* Adjust as needed to position on the side */
+        right: 10px;
+        /* Adjust as needed to position on the side */
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        gap: 4px; /* Space between dots */
-        z-index: 999; /* Ensure it stays on top */
+        gap: 4px;
+        /* Space between dots */
+        z-index: 999;
+        /* Ensure it stays on top */
     }
 
 
     /* Info page */
 
-    .STD-container{
+    .STD-container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -64,48 +66,51 @@
         height: 41vh;
     }
 
-    .STD-text{
+    .STD-text {
         font-size: min(10vw, 10vh);
         padding-bottom: min(2vw, 2vh);
     }
 
-    .date-loc-container{
+    .date-loc-container {
         align-items: center;
         padding-top: min(2vw, 2vh);
     }
 
-    .date-text, .loc-text {
+    .date-text,
+    .loc-text {
         font-size: min(3.9vw, 3.9vh);
     }
 
-    .date-loc-container img{
+    .date-loc-container img {
         height: min(6vh, 6vw);
     }
 
-    .mobile-center{
+    .mobile-center {
         display: flex;
         flex-direction: column;
         padding-top: 0;
     }
 
-    
+
     /* RSVP Section */
-    .event-text{
+    .event-text {
         font-size: min(3vw, 3vh);
     }
 
-    .red-text{
+    .red-text {
         font-size: min(3vw, 3vh);
     }
 
-    .small-dot{
+    .small-dot {
         margin-left: calc(0.15vw + 0.15vh);
-        width: calc(0.39vw + 0.39vh); /* Smaller dot size scaling */
+        width: calc(0.39vw + 0.39vh);
+        /* Smaller dot size scaling */
         height: calc(0.39vw + 0.39vh);
     }
 
     .big-dot {
-        width: calc(0.7vw + 0.7vh); /* Dot size scales with viewport */
+        width: calc(0.7vw + 0.7vh);
+        /* Dot size scales with viewport */
         height: calc(0.7vw + 0.7vh);
     }
 
@@ -113,7 +118,7 @@
         left: calc(0.3vw + 0.3vh);
     }
 
-    .rsvp-container a{
+    .rsvp-container a {
         justify-content: flex-start;
     }
 
@@ -121,7 +126,7 @@
         justify-content: flex-end;
     }
 
-    .timeline-center{
+    .timeline-center {
         padding-right: min(8vw, 8vh);
     }
 
@@ -131,13 +136,13 @@
     }
 
     /* FAQ Page */
-    
+
     .faq-bottom-container {
         font-size: min(3vw, 3vh);
         padding: min(2vw, 2vh);
     }
 
-    .chinese{
+    .chinese {
         font-size: min(3.3vw, 3.3vh);
     }
 
@@ -150,16 +155,18 @@
     }
 
     .button-bottom {
-        padding-bottom: min(27vw, 27vh); /* Optional: adds some spacing from the bottom */
+        padding-bottom: min(27vw, 27vh);
+        /* Optional: adds some spacing from the bottom */
     }
 
-    #languageToggle , #downloadButton{
+    #languageToggle,
+    #downloadButton {
         font-size: min(3vw, 3vh);
         height: min(5vw, 5vh);
         width: min(22vw, 22vh);
     }
 
-    .link-icon{
+    .link-icon {
         height: min(2vw, 2vh);
     }
 }

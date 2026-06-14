@@ -16,40 +16,54 @@
 /* Page CSS */
 
 :root {
-    --effective-vh: 100vh; /* Default value */
+    --effective-vh: 100vh;
+    /* Default value */
 }
 
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-html, body{
+html,
+body {
     background-color: #fffcf5;
     overflow: auto;
     height: 300vh;
-    scroll-behavior: smooth; /* Enables smooth scrolling */
-    scroll-snap-type: y mandatory; /* Ensure snapping behavior */
+    scroll-behavior: smooth;
+    /* Enables smooth scrolling */
+    scroll-snap-type: y mandatory;
+    /* Ensure snapping behavior */
     overflow-x: hidden;
 }
 
 section {
-    height: 100vh; /* Each section takes full viewport height */
-    scroll-snap-align: start; /* Aligns to the start of the viewport */
+    height: 100vh;
+    /* Each section takes full viewport height */
+    scroll-snap-align: start;
+    /* Aligns to the start of the viewport */
 }
 
 
 /* Sidebar Styling */
 .sidebar {
-    display: none; /* Initially hidden */
-    opacity: 0; /* Start as invisible for fade-in effect */
-    transition: opacity 0.5s ease-in-out; /* Transition for fading in/out */
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 /* Dot Style */
 .dot {
-    width: 10px; /* Default dot size for desktop */
+    width: 10px;
+    /* Default dot size for desktop */
     height: 10px;
     background-color: #3d6ba83a;
     border-radius: 50%;
@@ -59,7 +73,8 @@ section {
 
 /* Active Dot Style */
 .dot.active {
-    background-color: #3d6ba886; /* Highlighted color */
+    background-color: #3d6ba886;
+    /* Highlighted color */
 }
 
 
@@ -67,7 +82,8 @@ section {
 /* Loading Screen */
 /* Loading Screen CSS */
 #loading-screen {
-    position: fixed; /* Cover the whole viewport */
+    position: fixed;
+    /* Cover the whole viewport */
     top: 0;
     left: 0;
     width: 100%;
@@ -77,17 +93,22 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    opacity: 1; /* Fully visible by default */
-    transition: visibility 2s ease-out, opacity 2s ease-out; /* Smooth transition for opacity */
-    z-index: 1000; /* Ensure it’s on top of everything else */
+    opacity: 1;
+    /* Fully visible by default */
+    transition: visibility 2s ease-out, opacity 2s ease-out;
+    /* Smooth transition for opacity */
+    z-index: 1000;
+    /* Ensure it’s on top of everything else */
 }
 
 
 /* Loading Text and Image */
 .loading-text,
 #loading-screen img {
-    opacity: 0; /* Start invisible */
-    transition: opacity 2s ease-in; /* Fade-in transition */
+    opacity: 0;
+    /* Start invisible */
+    transition: opacity 2s ease-in;
+    /* Fade-in transition */
 }
 
 #loading-screen img {
@@ -97,7 +118,7 @@ section {
     object-fit: contain;
 }
 
-.loading-text{
+.loading-text {
     font-family: 'sarlotte';
     font-size: 20px;
     letter-spacing: 0.05em;
@@ -107,12 +128,14 @@ section {
 /* Fade-in when loading screen is visible */
 #loading-screen.visible .loading-text,
 #loading-screen.visible img {
-    opacity: 1; /* Fully visible */
+    opacity: 1;
+    /* Fully visible */
 }
 
 /* Hidden state for fade-out */
 #loading-screen.hidden {
-    opacity: 0; /* Change opacity to 0 to trigger fade-out */
+    opacity: 0;
+    /* Change opacity to 0 to trigger fade-out */
 }
 
 
@@ -120,9 +143,12 @@ section {
 
 #intro {
     height: 100vh;
-    visibility: hidden; /* Start hidden */
-    opacity: 0; /* Start with no opacity */
-    transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
+    visibility: hidden;
+    /* Start hidden */
+    opacity: 0;
+    /* Start with no opacity */
+    transition: opacity 2s ease-in-out;
+    /* Transition for the fade-in effect */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,30 +157,32 @@ section {
 
 /* When visible */
 #intro.visible {
-    visibility: visible; /* Makes it visible in the layout */
-    opacity: 1; /* Fully visible */
+    visibility: visible;
+    /* Makes it visible in the layout */
+    opacity: 1;
+    /* Fully visible */
 }
 
-.top-container{
+.top-container {
     padding-top: 25px;
     text-align: center;
 }
 
-.top-container img{
+.top-container img {
     width: auto;
     height: 30px;
     max-width: 100%;
     object-fit: contain;
 }
 
-.header-text{
+.header-text {
     font-family: 'sarlotte';
     font-size: min(1.1vw, 1.1vh);
     letter-spacing: 0.05em;
     color: #3d6ca8;
 }
 
-.bottom-container{
+.bottom-container {
     flex: 1;
     height: 100%;
     display: flex;
@@ -164,11 +192,11 @@ section {
     padding-bottom: min(15vw, 15vh);
 }
 
-.img-text-container{
+.img-text-container {
     position: relative;
 }
 
-.bottom-container img{
+.bottom-container img {
     padding-right: min(9vw, 9vh);
     width: auto;
     height: 90%;
@@ -176,7 +204,7 @@ section {
     object-fit: contain;
 }
 
-.name-year-container{
+.name-year-container {
     padding-right: min(9vw, 9vh);
     height: 10%;
     display: flex;
@@ -185,14 +213,14 @@ section {
     font-weight: 100;
 }
 
-.chi-name-text1{
+.chi-name-text1 {
     font-family: 'leelawadee';
     letter-spacing: 0.1em;
     font-size: min(5vw, 3vh);
     color: #3d84b3;
 }
 
-.chi-name-text2{
+.chi-name-text2 {
     margin-top: 0.2em;
     font-family: 'leelawadee';
     font-size: min(3.5vw, 2.5vh);
@@ -201,25 +229,29 @@ section {
 
 
 /* Info Page */
-#info{
+#info {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    visibility: hidden; /* or use opacity: 0; */
-    opacity: 0; /* Use opacity for fade-in effect */
+    visibility: hidden;
+    /* or use opacity: 0; */
+    opacity: 0;
+    /* Use opacity for fade-in effect */
 }
 
 /* When visible */
 #info.visible {
-    visibility: visible; /* or just remove this line if using opacity */
+    visibility: visible;
+    /* or just remove this line if using opacity */
     opacity: 1;
-    transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
+    transition: opacity 2s ease-in-out;
+    /* Transition for the fade-in effect */
 }
 
 /* Location Section */
 
-.STD-loc-rsvp-container{
+.STD-loc-rsvp-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -227,7 +259,7 @@ section {
     align-items: center;
 }
 
-.STD-loc-container{
+.STD-loc-container {
     height: 50vh;
     display: flex;
     flex-direction: column;
@@ -235,54 +267,64 @@ section {
 }
 
 
-.STD-text{
+.STD-text {
     font-family: 'sarlotte';
     font-size: min(5vw, 5vh);
     color: #7439a8;
 }
 
-.STD-pic-container{
-    width: 100%; /* Ensure it takes full width */
-    max-height: 50vh; /* Limit height */
-    overflow: hidden; /* Hide overflow */
+.STD-pic-container {
+    width: 100%;
+    /* Ensure it takes full width */
+    max-height: 50vh;
+    /* Limit height */
+    overflow: hidden;
+    /* Hide overflow */
     position: relative;
 }
 
-.STD-pic-container img{
+.STD-pic-container img {
     width: auto;
     height: min(30vh, 30vw);
     max-width: 100%;
     object-fit: contain;
 }
 
-.date-loc-container{
+.date-loc-container {
     display: flex;
     flex-direction: column;
 }
 
-.date-loc-container img{
+.date-loc-container img {
     height: min(3.5vh, 3.5vw);
     margin-right: 1%;
 }
 
-.date-text, .loc-text {
-    display: flex;                /* Use flexbox for alignment within each section */
-    align-items: center;          /* Center align items vertically */
+.date-text,
+.loc-text {
+    display: flex;
+    /* Use flexbox for alignment within each section */
+    align-items: center;
+    /* Center align items vertically */
     font-size: min(2vw, 2vh);
     font-family: 'sarlotte';
     color: #3d6ca8;
     word-spacing: 0.15em;
 }
 
-.mobile-center{
+.mobile-center {
     padding-top: min(2vh, 2vw);
 }
 
-.loc-text a, .date-text a {
+.loc-text a,
+.date-text a {
     display: flex;
-    align-items: center; /* Center vertically */
-    width: auto; /* Ensure it takes the full width available */
-    color: #3d6ca8;       /* Match your text color */
+    align-items: center;
+    /* Center vertically */
+    width: auto;
+    /* Ensure it takes the full width available */
+    color: #3d6ca8;
+    /* Match your text color */
     white-space: nowrap;
     text-decoration: none;
     border-bottom: 1px dotted #3d6ca8;
@@ -290,7 +332,7 @@ section {
 
 /* RSVP Section */
 
-.timeline-rsvp-container{
+.timeline-rsvp-container {
     height: 40vh;
     width: 100%;
     overflow: hidden;
@@ -300,13 +342,13 @@ section {
     padding-bottom: min(8vw, 8vh);
 }
 
-.timeline-container{
+.timeline-container {
     width: 50%;
     display: flex;
     justify-content: center;
 }
 
-.timeline-center{
+.timeline-center {
     width: auto;
     display: flex;
 }
@@ -325,25 +367,29 @@ section {
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    margin-bottom: 5vh; /* Margin scales with screen height */
+    margin-bottom: 5vh;
+    /* Margin scales with screen height */
 }
 
 .event-text {
     padding-left: calc(0.5vw + 0.5vh);
     font-family: 'leelawadee';
-    font-size: min(1.3vw, 1.3vh); /* Text size scales with viewport size */
+    font-size: min(1.3vw, 1.3vh);
+    /* Text size scales with viewport size */
     color: #3d6ca8;
     padding-top: 3%;
 }
 
-.red-text{
+.red-text {
     padding-left: calc(0.5vw + 0.5vh);
     font-family: 'leelawadee';
-    font-size: min(1.3vw, 1.3vh); /* Text size scales with viewport size */
+    font-size: min(1.3vw, 1.3vh);
+    /* Text size scales with viewport size */
     color: #d90000;
 }
 
-.big-dot, .small-dot {
+.big-dot,
+.small-dot {
     border-radius: 50%;
     background-color: black;
     z-index: 1;
@@ -351,52 +397,56 @@ section {
 }
 
 .big-dot {
-    width: calc(0.55vw + 0.55vh); /* Dot size scales with viewport */
+    width: calc(0.55vw + 0.55vh);
+    /* Dot size scales with viewport */
     height: calc(0.55vw + 0.55vh);
 }
 
 .small-dot {
     margin-left: calc(0.12vw + 0.12vh);
     margin-right: calc(0.3vw + 0.3vh);
-    width: calc(0.3vw + 0.3vh); /* Smaller dot size scaling */
+    width: calc(0.3vw + 0.3vh);
+    /* Smaller dot size scaling */
     height: calc(0.3vw + 0.3vh);
-    
+
 }
 
 .line {
     position: absolute;
-    width: calc(0.08vw + 0.08vh); /* Same width as big-line */
-    height: 100%;  /* Longer line height for middle events */
+    width: calc(0.08vw + 0.08vh);
+    /* Same width as big-line */
+    height: 100%;
+    /* Longer line height for middle events */
     background-color: black;
     left: calc(0.22vw + 0.22vh);
     overflow: hidden;
-    background-color: #3d6ca8;    
+    background-color: #3d6ca8;
 }
 
-.timeline-event:last-child{
+.timeline-event:last-child {
     margin: 0;
 }
 
-.timeline-event:last-child .event-text{
+.timeline-event:last-child .event-text {
     font-style: italic;
 }
 
 
 
 /* RSVP Section */
-.rsvp-container{
+.rsvp-container {
     left: 50%;
     width: 50%;
 }
 
-.rsvp-container a{
+.rsvp-container a {
     display: flex;
     justify-content: center;
     width: 100%;
 
 }
 
-.rsvp-container img{
+.rsvp-container img {
     width: min(25vw, 25vh);
     height: auto;
 }
@@ -406,9 +456,12 @@ section {
 /* FAQ Page */
 #faq {
     height: 100vh;
-    visibility: hidden; /* Start hidden */
-    opacity: 0; /* Start with no opacity */
-    transition: opacity 2s ease-in-out; /* Transition for the fade-in effect */
+    visibility: hidden;
+    /* Start hidden */
+    opacity: 0;
+    /* Start with no opacity */
+    transition: opacity 2s ease-in-out;
+    /* Transition for the fade-in effect */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -417,11 +470,13 @@ section {
 
 /* When visible */
 #faq.visible {
-    visibility: visible; /* Makes it visible in the layout */
-    opacity: 1; /* Fully visible */
+    visibility: visible;
+    /* Makes it visible in the layout */
+    opacity: 1;
+    /* Fully visible */
 }
 
-.faq-container{
+.faq-container {
     height: 100vh;
     width: 90vw;
     display: flex;
@@ -449,19 +504,23 @@ section {
 .faq-link {
     text-decoration: none;
     border-bottom: 1px dotted #7439a8;
-    color: #7439a8; /* Default color */
+    color: #7439a8;
+    /* Default color */
 }
 
 .faq-link:visited {
-    color: #7439a8; /* Color after link is visited */
+    color: #7439a8;
+    /* Color after link is visited */
 }
 
 .faq-link:hover {
-    color: #7439a8; /* Color on hover */
+    color: #7439a8;
+    /* Color on hover */
 }
 
 .faq-link:active {
-    color: #7439a8; /* Color when link is clicked */
+    color: #7439a8;
+    /* Color when link is clicked */
 }
 
 
@@ -483,17 +542,17 @@ section {
     display: flex;
 }
 
-.question-container div{
+.question-container div {
     padding-top: min(0.5vw, 0.5vh);
 }
 
-.question-container img{
+.question-container img {
     height: min(3.5vw, 3.5vh);
     padding-right: min(1vw, 1vh);
 }
 
 /* Remove top border from the first question in the FAQ section */
-.question-answer-container > .Q-A:first-child > .question-container {
+.question-answer-container>.Q-A:first-child>.question-container {
     padding-top: 0;
     border-top: none;
 }
@@ -503,24 +562,33 @@ section {
 }
 
 .faq-bottom-container {
-    flex-grow: 1; /* Allows the content area to grow and push the button down */
+    flex-grow: 1;
+    /* Allows the content area to grow and push the button down */
 }
 
 .button-bottom {
     display: flex;
     justify-content: center;
-    margin-top: auto; /* Pushes the button to the bottom */
-    padding-bottom: min(15vw, 15vh); /* Optional: adds some spacing from the bottom */
+    margin-top: auto;
+    /* Pushes the button to the bottom */
+    padding-bottom: min(15vw, 15vh);
+    /* Optional: adds some spacing from the bottom */
     gap: 5px;
 }
 
-#languageToggle , #downloadButton{
+#languageToggle,
+#downloadButton {
     background-color: #719cd4;
-    color: white; /* White text */
-    border: none; /* Remove borders */
-    border-radius: min(3vw, 3vh); /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Transition for background color */
+    color: white;
+    /* White text */
+    border: none;
+    /* Remove borders */
+    border-radius: min(3vw, 3vh);
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s;
+    /* Transition for background color */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -530,12 +598,11 @@ section {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.button-bottom a{
+.button-bottom a {
     text-decoration: none;
 }
 
-.link-icon{
+.link-icon {
     height: min(1.2vw, 1.2vh);
     width: auto;
 }
-
