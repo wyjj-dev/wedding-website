@@ -195,6 +195,10 @@ window.addEventListener('touchstart', (event) => {
 });
 
 window.addEventListener('touchend', (event) => {
+    if (event.target.closest('.answer-container')) {
+        return;
+    }
+
     touchEndY = event.changedTouches[0].clientY;
     const deltaY = touchEndY - touchStartY;
 
@@ -208,6 +212,9 @@ window.addEventListener('touchend', (event) => {
 });
 
 window.addEventListener('touchmove', (event) => {
+    if (event.target.closest('.answer-container')) {
+        return;
+    }
     event.preventDefault();
 }, { passive: false });
 
