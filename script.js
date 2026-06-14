@@ -153,6 +153,11 @@ function scrollToSection(index) {
 }
 
 function handleScroll(event) {
+    const answer = event.target.closest('.answer-container');
+    if (answer && answer.scrollHeight > answer.clientHeight) {
+        return;
+    }
+
     event.preventDefault();
     if (isScrolling || popupOpen) return;
     isScrolling = true;
@@ -271,12 +276,16 @@ function toggleAnswer(clickedQuestion) {
     const answer = clickedQuestion.nextElementSibling;
     const isAnswerOpen = answer.style.display === "block";
 
-    allAnswers.forEach(answer => {
-        answer.style.display = "none";
+    allAnswers.forEach(a => {
+        a.style.display = "none";
+        a.scrollTop = 0;
     });
 
     if (!isAnswerOpen) {
         answer.style.display = "block";
+        requestAnimationFrame(() => {
+            answer.scrollTop = 0;
+        });
     }
 }
 

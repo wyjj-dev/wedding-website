@@ -473,6 +473,7 @@ section {
 .faq-container {
     height: 100vh;
     width: 90vw;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -513,6 +514,8 @@ section {
     padding-right: min(8vw, 8vh);
     transition: all 0.3s ease;
     text-align: justify;
+    max-height: 30vh;
+    overflow-y: auto;
 }
 
 .question-container {
