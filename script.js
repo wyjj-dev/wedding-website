@@ -5,7 +5,6 @@ function handleTouchStart(event) {
         event.preventDefault();
     }
 }
-
 function scrollToTop() {
     setTimeout(() => {
         window.scrollTo(0, 0);
@@ -25,6 +24,7 @@ const SIDEBAR_HIDDEN_CLASS = 'sidebar-hidden';
 function showLoadingScreen(loadingScreen, sidebar) {
     loadingScreen.classList.add('visible');
     document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
     isScrolling = true;
     sidebar.classList.add(SIDEBAR_HIDDEN_CLASS);
 }
@@ -34,6 +34,7 @@ function hideLoadingScreen(loadingScreen) {
     setTimeout(() => {
         loadingScreen.style.display = 'none';
         document.body.style.overflow = '';
+        document.body.style.touchAction = '';
         isScrolling = false;
     }, HIDE_DELAY);
 }
@@ -182,7 +183,7 @@ window.addEventListener('touchend', (event) => {
     touchEndY = event.changedTouches[0].clientY;
     const deltaY = touchEndY - touchStartY;
 
-    if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE && !popupOpen) {
+    if (Math.abs(deltaY) > MIN_SWIPE_DISTANCE && !popupOpen && !isScrolling) {
         if (deltaY < 0) {
             scrollToSection(currentSection + 1);
         } else if (deltaY > 0) {
