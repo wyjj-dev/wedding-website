@@ -76,6 +76,8 @@ function showSidebar() {
     updateActiveSection();
 }
 
+let previousActiveSectionId = '';
+
 function updateActiveSection() {
     const sections = document.querySelectorAll('section');
     let activeSectionId = '';
@@ -96,6 +98,12 @@ function updateActiveSection() {
             dot.classList.add('active');
         }
     });
+
+    if (previousActiveSectionId === 'faq' && activeSectionId !== 'faq') {
+        closeAllAnswers();
+    }
+
+    previousActiveSectionId = activeSectionId;
 }
 
 document.addEventListener('scroll', debounce(function () {
@@ -294,6 +302,13 @@ function toggleAnswer(clickedQuestion) {
             answer.scrollTop = 0;
         });
     }
+}
+
+function closeAllAnswers() {
+    document.querySelectorAll('.answer-container').forEach(a => {
+        a.style.display = "none";
+        a.scrollTop = 0;
+    });
 }
 
 document.querySelectorAll('.question-container').forEach(q => {
