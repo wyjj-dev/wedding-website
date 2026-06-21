@@ -540,7 +540,8 @@ section {
     border-top: none;
 }
 
-.question-container:hover {
+.question-container:active,
+.question-container.open {
     color: #d90000;
 }
 

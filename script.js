@@ -288,6 +288,7 @@ function updateDownloadLinkAndButton() {
 // FAQ toggle
 function toggleAnswer(clickedQuestion) {
     const allAnswers = document.querySelectorAll('.answer-container');
+    const allQuestions = document.querySelectorAll('.question-container');
     const answer = clickedQuestion.nextElementSibling;
     const isAnswerOpen = answer.style.display === "block";
 
@@ -295,9 +296,13 @@ function toggleAnswer(clickedQuestion) {
         a.style.display = "none";
         a.scrollTop = 0;
     });
+    allQuestions.forEach(q => {
+        q.classList.remove('open');
+    });
 
     if (!isAnswerOpen) {
         answer.style.display = "block";
+        clickedQuestion.classList.add('open');
         requestAnimationFrame(() => {
             answer.scrollTop = 0;
         });
@@ -308,6 +313,9 @@ function closeAllAnswers() {
     document.querySelectorAll('.answer-container').forEach(a => {
         a.style.display = "none";
         a.scrollTop = 0;
+    });
+    document.querySelectorAll('.question-container').forEach(q => {
+        q.classList.remove('open');
     });
 }
 
